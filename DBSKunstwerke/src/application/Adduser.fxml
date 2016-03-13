@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65" fx:controller="application.AddUserController">
+  <tabs>
+    <Tab text="Nutzerangaben">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="txtUsername" layoutX="18.0" layoutY="26.0" promptText="Nutzername" AnchorPane.leftAnchor="18.0" />
+                  <TextField fx:id="txtPassword" layoutX="341.0" layoutY="28.0" promptText="Passwort" AnchorPane.leftAnchor="341.0" AnchorPane.rightAnchor="88.0" />
+                  <TextField fx:id="txtEmail" layoutX="16.0" layoutY="126.0" promptText="E-Mail" AnchorPane.leftAnchor="18.0" />
+                  <TextField fx:id="txtFirstname" layoutX="19.0" layoutY="223.0" promptText="Vorname" AnchorPane.leftAnchor="18.0" />
+                  <TextField fx:id="txtSurname" layoutX="348.0" layoutY="229.0" promptText="Nachnname" AnchorPane.leftAnchor="341.0" AnchorPane.rightAnchor="88.0" />
+                  <CheckBox fx:id="cboxArtist" layoutX="23.0" layoutY="69.0" mnemonicParsing="false" text="Kuenstler" />
+                  <HBox layoutX="182.0" layoutY="312.0" />
+                  <HBox layoutX="104.0" layoutY="307.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="CheckBtn" mnemonicParsing="false" onAction="#handleCheckButtonAction" text="Überprüfen" />
+                        <Button fx:id="AddBtn" mnemonicParsing="false" onAction="#handleAddButtonAction" text="Hinzufügen" />
+                        <Label text="StatusLabel" textFill="#e10b0b">
+                           <font>
+                              <Font name="Droid Sans Mono" size="19.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Adresse">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <HBox layoutX="22.0" layoutY="27.0" spacing="50.0">
+                     <children>
+                        <TextField text="Stadt" />
+                        <TextField promptText="Land" text="Land" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="26.0" layoutY="88.0" spacing="50.0">
+                     <children>
+                        <TextField text="Straße" />
+                        <TextField text="Hausnummer" />
+                     </children>
+                  </HBox>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>
