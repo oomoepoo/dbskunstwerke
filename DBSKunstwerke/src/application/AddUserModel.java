@@ -40,7 +40,6 @@ public class AddUserModel {
 		}
 		return returnvalue;
 
-
 	}
 
 	/**

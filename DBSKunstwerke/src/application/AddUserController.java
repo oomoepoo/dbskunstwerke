@@ -1,6 +1,7 @@
 package application;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -31,6 +32,14 @@ public class AddUserController implements Initializable{
 	@FXML
 	private TextField txtSurname;
 	@FXML
+	private TextField txtStreet;
+	@FXML
+	private TextField txtCity;
+	@FXML
+	private TextField txtCountry;
+	@FXML
+	private TextField txtNumber;
+	@FXML
 	private CheckBox cboxArtist;
 	@FXML
 	private void handleAddButtonAction (ActionEvent e){
@@ -41,13 +50,24 @@ public class AddUserController implements Initializable{
 		String nachname = txtSurname.getText();
 		Boolean kuenstler = cboxArtist.isSelected();
 
-			AddUserModel.AddUsersData(username, password, email, vorname, nachname, kuenstler);
+		AddUserModel.AddUsersData(username, password, email, vorname, nachname, kuenstler);
 
 
 	}
-	@FXML
-	private void handleCheckButtonAction(ActionEvent e){
 
+	@FXML
+	private void handleCheckButtonAction(ActionEvent event){
+		try {
+			if(AddUserModel.isUnique(txtUsername.getText())){
+				AddBtn.setDisable(false);
+			} else {
+				StatusLabel.setText("Nutzername existiert bereits!");
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		StatusLabel.setText("SQL-Fehler!");
 
 	}
 

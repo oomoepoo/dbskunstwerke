@@ -45,8 +45,8 @@ public class LoginController implements Initializable {
 			((Node)event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
-			TabPane root;
-			root = loader.load(getClass().getResource("/application/Adduser.fxml").openStream());
+			Pane root;
+			root = loader.load(getClass().getResource("/application/AddUser.fxml").openStream());
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
