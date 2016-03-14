@@ -2,6 +2,7 @@ package application;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -43,14 +44,8 @@ public class AddUserController implements Initializable{
 	private CheckBox cboxArtist;
 	@FXML
 	private void handleAddButtonAction (ActionEvent e){
-		String username = txtUsername.getText();
-		String password = txtPassword.getText();
-		String email = txtEmail.getText();
-		String vorname = txtFirstname.getText();
-		String nachname = txtSurname.getText();
-		Boolean kuenstler = cboxArtist.isSelected();
-
-		AddUserModel.AddUsersData(username, password, email, vorname, nachname, kuenstler);
+		AddUserModel.AddUsersData(getUserData(), cboxArtist.isSelected());
+		AddUserModel.addAddressData(txtUsername.getText().trim(), getAddressData());
 
 
 	}
@@ -58,16 +53,50 @@ public class AddUserController implements Initializable{
 	@FXML
 	private void handleCheckButtonAction(ActionEvent event){
 		try {
-			if(AddUserModel.isUnique(txtUsername.getText())){
+			if(AddUserModel.isUnique(txtUsername.getText().trim())){
 				AddBtn.setDisable(false);
 			} else {
 				StatusLabel.setText("Nutzername existiert bereits!");
 			}
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
+			StatusLabel.setText("SQL-Fehler!");
 			e1.printStackTrace();
 		}
-		StatusLabel.setText("SQL-Fehler!");
+
+	}
+	private ArrayList<String> getUserData(){
+		String username = txtUsername.getText().trim();
+		String password = txtPassword.getText().trim();
+		String email = txtEmail.getText().trim();
+		String vorname = txtFirstname.getText().trim();
+		String nachname = txtSurname.getText().trim();
+		ArrayList<String> userData = new ArrayList<String>();
+		userData.add(username);
+		userData.add(password);
+		userData.add(email);
+		userData.add(vorname);
+		userData.add(nachname);
+		return userData;
+
+
+
+
+	}
+
+	private ArrayList<String> getAddressData(){
+		String land = txtUsername.getText().trim();
+		String stadt = txtPassword.getText().trim();
+		String strasse = txtEmail.getText().trim();
+		String hausnummer = txtFirstname.getText().trim();
+		ArrayList<String> addressData = new ArrayList<String>();
+		addressData.add(land);
+		addressData.add(stadt);
+		addressData.add(strasse);
+		addressData.add(hausnummer);
+		return addressData;
+
+
+
 
 	}
 

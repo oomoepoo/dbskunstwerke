@@ -1,6 +1,7 @@
 package application;
 
 import java.sql.*;
+import java.util.ArrayList;
 /**
  * Model Class for the AddUser window
  * handles adding stuff to user and address tables...
@@ -10,6 +11,8 @@ import java.sql.*;
  */
 public class AddUserModel {
 	Connection conection;
+
+
 
 	public AddUserModel () {
 		conection = SQLiteConection.Connector();
@@ -43,31 +46,44 @@ public class AddUserModel {
 	}
 
 	/**
+	 * Add an address with the given parameters to the database.
+	 *
+	 * @param city
+	 * @param country
+	 * @param number
+	 * @param street
+	 */
+	public void addAddressData (String User, ArrayList<String> addressData) {
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String query1 = "Insert into Adresse (Land, Stadt, Strasse, Hausnummer) values (?,?,?,?)";
+		String query2 = "Select AdressenID from Adresse where Land = ? and Stadt = ? and Strasse = ? and Hausnummer = ?";
+		String query3 = "Update Benutzer set Adresse=? where Benutzername=?";
+
+	}
+
+	/**
 	 * Adds Users (and artists) to the Database
 	 *
-	 * @param username Username to add (must be unique in the DB)
-	 * @param password Password to the Username
-	 * @param email Email of the user
-	 * @param vorname first name of the user
-	 * @param nachname surname of the user
-	 * @param kuenstler if true, adds username to the artist table too.
-	 * @return true if the query was successful.
+	 * @param userData an Arraylist containing the String userdata.
+	 * @param kuenstler denotes whether the user should be an artist(thus getting the username added into the artists table too.)
+	 * @return
 	 */
-	public boolean AddUsersData (String username, String password, String email, String vorname, String nachname, Boolean kuenstler){
+	// TODO: Add Adress Stuff smh.
+	public boolean AddUsersData (ArrayList<String> userData, Boolean kuenstler){
 		PreparedStatement preparedStatement = null;
 		String query = "Insert into Benutzer (Benutzername,Vorname, Nachname, Passwort, E-Mail) values (?,?,?,?,?)";
 		String query2 = "Insert into Kuenstler (Benutzername) values (?)";
+		//TODO: Refractor the sql crap into a method.
 		try {
 			preparedStatement = conection.prepareStatement(query);
-			preparedStatement.setString(1, username);
-			preparedStatement.setString(2, vorname);
-			preparedStatement.setString(3, nachname);
-			preparedStatement.setString(4, password);
-			preparedStatement.setString(5, email);
+			for(int i=1; i<6;i++){
+				preparedStatement.setString(i, userData.get(i));
+			}
 			preparedStatement.executeUpdate();
 			if(kuenstler){
 				preparedStatement = conection.prepareStatement(query2);
-				preparedStatement.setString(1,username);
+				preparedStatement.setString(1,userData.get(1));
 				preparedStatement.executeUpdate();
 			}
 			conection.close();

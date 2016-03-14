@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddUserController">
    <children>
@@ -31,19 +32,27 @@
             <TextField fx:id="txtSurname" promptText="Nachname" />
          </children>
       </VBox>
-      <Label fx:id="StatusLabel" layoutX="225.0" layoutY="319.0" prefHeight="26.0" prefWidth="171.0" text="Status" />
-      <CheckBox layoutX="228.0" layoutY="153.0" mnemonicParsing="false" text="Künstler">
+      <Label fx:id="StatusLabel" layoutX="32.0" layoutY="382.0" text="Daten eingeben und Überprüfen klicken!">
+         <font>
+            <Font name="Droid Sans" size="16.0" />
+         </font></Label>
+      <CheckBox fx:id="cboxArtist" layoutX="228.0" layoutY="153.0" mnemonicParsing="false" text="Künstler">
          <tooltip>
             <Tooltip text="Trägt den Benutzer als Künstler ein, falls ausgewählt." />
          </tooltip>
       </CheckBox>
       <VBox layoutX="32.0" layoutY="262.0" spacing="30.0">
          <children>
-            <TextField promptText="Straße" />
-            <TextField promptText="Land" />
+            <TextField fx:id="txtStreet" promptText="Straße" />
+            <TextField fx:id="txtCountry" promptText="Land" />
          </children>
       </VBox>
-      <TextField layoutX="224.0" layoutY="261.0" promptText="Hausnummer" />
+      <VBox layoutX="224.0" layoutY="261.0" spacing="30.0">
+         <children>
+            <TextField fx:id="txtNumber" promptText="Hausnummer" />
+            <TextField fx:id="txtCity" promptText="Stadt" />
+         </children>
+      </VBox>
    </children>
    <padding>
       <Insets bottom="30.0" right="30.0" />
