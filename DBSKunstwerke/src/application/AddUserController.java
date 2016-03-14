@@ -47,7 +47,6 @@ public class AddUserController implements Initializable{
 		AddUserModel.AddUsersData(getUserData(), cboxArtist.isSelected());
 		AddUserModel.addAddressData(txtUsername.getText().trim(), getAddressData());
 
-
 	}
 
 	@FXML
@@ -64,6 +63,13 @@ public class AddUserController implements Initializable{
 		}
 
 	}
+
+	/**
+	 * Gets data from the TextFields and compiles an ArrayList out of it.
+	 * Order is <b>always</b> username, password, email, firstname, lastname
+	 *
+	 * @return an ArrayList of Strings with the userdata.
+	 */
 	private ArrayList<String> getUserData(){
 		String username = txtUsername.getText().trim();
 		String password = txtPassword.getText().trim();
@@ -82,6 +88,13 @@ public class AddUserController implements Initializable{
 
 
 	}
+
+	/**
+	 * Gets Data from the Textfields and builds an ArrayList out of it
+	 * Order is <b>always</b> country, city, street, number
+	 *
+	 * @return an ArrayList of Strings with the address data.
+	 */
 
 	private ArrayList<String> getAddressData(){
 		String land = txtUsername.getText().trim();
