@@ -13,23 +13,24 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddUserController">
    <children>
-      <ButtonBar layoutX="16.0" layoutY="451.0" prefHeight="36.0" prefWidth="222.0">
+      <ButtonBar layoutX="12.0" layoutY="451.0" prefHeight="26.0" prefWidth="345.0">
         <buttons>
+            <Button fx:id="BackBtn" mnemonicParsing="false" text="Zum Login" onAction="#handleBackButtonAction"/>
             <Button fx:id="CheckBtn" mnemonicParsing="false" onAction="#handleCheckButtonAction" text="Überprüfen" />
           <Button fx:id="AddBtn" disable="true" mnemonicParsing="false" onAction="#handleAddButtonAction" text="Hinzufügen" />
         </buttons>
       </ButtonBar>
       <VBox focusTraversable="true" layoutX="33.0" layoutY="39.0" spacing="30.0">
          <children>
-            <TextField fx:id="txtUsername" promptText="Nutzername" />
-            <TextField fx:id="txtPassword" promptText="Passwort" />
-            <TextField fx:id="txtEmail" promptText="E-Mail" />
+            <TextField fx:id="txtUsername" promptText="Nutzername" text="Nutzername" />
+            <TextField fx:id="txtPassword" promptText="Passwort" text="Passwort" />
+            <TextField fx:id="txtEmail" promptText="E-Mail" text="E-Mail" />
          </children>
       </VBox>
       <VBox layoutX="225.0" layoutY="39.0" spacing="30.0">
          <children>
-            <TextField fx:id="txtFirstname" promptText="Vorname" />
-            <TextField fx:id="txtSurname" promptText="Nachname" />
+            <TextField fx:id="txtFirstname" promptText="Vorname" text="Vorname" />
+            <TextField fx:id="txtSurname" promptText="Nachname" text="Nachname" />
          </children>
       </VBox>
       <Label fx:id="StatusLabel" layoutX="32.0" layoutY="382.0" text="Daten eingeben und Überprüfen klicken!">
@@ -43,14 +44,14 @@
       </CheckBox>
       <VBox layoutX="32.0" layoutY="262.0" spacing="30.0">
          <children>
-            <TextField fx:id="txtStreet" promptText="Straße" />
-            <TextField fx:id="txtNumber" promptText="Hausnummer" />
+            <TextField fx:id="txtStreet" promptText="Straße" text="Straße" />
+            <TextField fx:id="txtNumber" promptText="Hausnummer" text="Hausnummer" />
          </children>
       </VBox>
       <VBox layoutX="224.0" layoutY="261.0" spacing="30.0">
          <children>
-            <TextField fx:id="txtCountry" promptText="Land" />
-            <TextField fx:id="txtCity" promptText="Stadt" />
+            <TextField fx:id="txtCountry" promptText="Land" text="Land" />
+            <TextField fx:id="txtCity" promptText="Stadt" text="Stadt" />
          </children>
       </VBox>
    </children>

@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,17 +8,27 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 
 public class AddUserController implements Initializable{
 	public AddUserModel AddUserModel = new AddUserModel();
+	/*
+	 * Initialize the various Elements of the window with their FX-ID
+	 */
 	@FXML
 	private Label StatusLabel;
+	@FXML
+	private Button BackBtn;
 	@FXML
 	private Button AddBtn;
 	@FXML
@@ -42,6 +53,13 @@ public class AddUserController implements Initializable{
 	private TextField txtNumber;
 	@FXML
 	private CheckBox cboxArtist;
+
+	/**
+	 * Handle the Add-Button press.
+	 * Get the User-Input and deliver it to the Model.
+	 *
+	 * @param e
+	 */
 	@FXML
 	private void handleAddButtonAction (ActionEvent e){
 
@@ -64,7 +82,45 @@ public class AddUserController implements Initializable{
 
 
 	}
+	/**
+	 * Handle the Back-Button presses.
+	 * closes this window and opens the Login window again.
+	 *
+	 * @param event
+	 */
+	@FXML
+	private void handleBackButtonAction(ActionEvent event){
 
+		((Node)event.getSource()).getScene().getWindow().hide();
+
+		/*
+		 * Set up a new User window.
+		 * I should probably export this to another class and or method
+		 */
+		// TODO: Think about a solution, because we will need a few more windows...
+
+		Stage primaryStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = null;
+		try {
+			root = loader.load(getClass().getResource("/application/Login.fxml").openStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		primaryStage.setScene(scene);
+		primaryStage.show();
+
+	}
+
+	/**
+	 * Handle Check Button presses.
+	 * checks if the Username is unique.
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void handleCheckButtonAction(ActionEvent event){
 		try {
@@ -83,7 +139,8 @@ public class AddUserController implements Initializable{
 
 	/**
 	 * Gets data from the TextFields and compiles an ArrayList out of it.
-	 * Order is <b>always</b> username, password, email, firstname, lastname
+	 * Order is <b>always</b>:
+	 * username, password, email, firstname, lastname
 	 *
 	 * @return an ArrayList of Strings with the userdata.
 	 */
@@ -135,7 +192,6 @@ public class AddUserController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		AddBtn.setDisable(true);
-		// TODO Auto-generated method stub
 
 	}
 
