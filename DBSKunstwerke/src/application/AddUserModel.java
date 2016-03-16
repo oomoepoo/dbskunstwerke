@@ -25,11 +25,11 @@ public class AddUserModel {
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = conection.prepareStatement(query);
-			for (int i=1; i< data.size();i++){
-				preparedStatement.setString(i, data.get(i));
+			for (int i=0; i< data.size();i++){
+				preparedStatement.setString(i+1, data.get(i));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e);
 			e.printStackTrace();
 		}
 		return preparedStatement;
@@ -68,27 +68,43 @@ public class AddUserModel {
 	 * @param addressData ArrayList containing the Data (country, city, street, number)
 	 */
 	public void addAddressData (String User, ArrayList<String> addressData) {
-		ResultSet resultSet = null;
+		ResultSet results = null;
+		int AID = 0;
 		try {
-			int AID;
-			PreparedStatement query1 = buildQuery("Select AdressenID from Adresse where Land = ? and Stadt = ? and Strasse = ? and Hausnummer = ?", addressData);
-			PreparedStatement query2 = buildQuery("Insert into Adresse (Land, Stadt, Strasse, Hausnummer) values (?,?,?,?)", addressData);
-			PreparedStatement query3 = conection.prepareStatement("Update Benutzer set Adresse=? where Benutzername=?");
-			resultSet = query1.executeQuery();
-			if(resultSet.next()){
-				 AID = resultSet.getInt(1);
-			} else {
-				query2.executeUpdate();
+			String s_query1 = "Select AdressenID from Adresse where Land = ? and Stadt = ? and Strasse = ? and Hausnummer = ?";
+			PreparedStatement query1 = conection.prepareStatement(s_query1);
+			for (int i=0; i< addressData.size();i++){
+				query1.setString(i+1, addressData.get(i));
 			}
-			AID = query1.executeQuery().getInt(1);
+			results = query1.executeQuery();
+			//check if Address already exists in the DB.
+			//If it isn't: Insert it.
+			if (!(results.next())){
+				String s_query2 = "Insert into Adresse (Land, Stadt, Strasse, Hausnummer) values (?,?,?,?)";
+				PreparedStatement query2=conection.prepareStatement(s_query2);
+				for(int i = 0; i < addressData.size();i++){
+					query2.setString(i+1, addressData.get(i));
+				}
+				query2.executeUpdate();
+				//I can't think of anything better, so we execute the first query again, to get the AddressID.
+				ResultSet results2 = query1.executeQuery();
+				while(results2.next()){
+					AID = results2.getInt("AdressenID");
+				}
+
+			} else {
+				//if the Address already is in the DB, get the AID.
+				AID = results.getInt("AdressenID");
+			}
+
+			//Update the user with the new Address.
+			PreparedStatement query3 = conection.prepareStatement("Update Benutzer set Adresse = ? where Benutzername = ?");
 			query3.setInt(1, AID);
 			query3.setString(2, User);
 			query3.executeUpdate();
-			query1.close();
-			query2.close();
 			query3.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			//TODO: think about a proper exception thingy.
 			e.printStackTrace();
 		}
 	}
@@ -100,24 +116,27 @@ public class AddUserModel {
 	 * @param kuenstler denotes whether the user should be an artist(thus getting the username added into the artists table too.)
 	 */
 
-	public void AddUsersData (ArrayList<String> userData, Boolean kuenstler){
-		PreparedStatement preparedStatement = null;
-		String query = "Insert into Benutzer (Benutzername,Vorname, Nachname, Passwort, E-Mail) values (?,?,?,?,?)";
-		String query2 = "Insert into Kuenstler (Benutzername) values (?)";
+	public void AddUsersData (ArrayList<String> userData, Boolean kuenstler) {
+		PreparedStatement prepStatement = null;
+		PreparedStatement u_query = buildQuery("Insert into Benutzer (Benutzername, Passwort, `E-Mail`, Vorname, Nachname) values (?,?,?,?,?)", userData);
+		String u_query2 = "Insert into Kuenstler (Benutzername) values (?)";
 		try {
-			preparedStatement = conection.prepareStatement(query);
-			for(int i=1; i<6;i++){
-				preparedStatement.setString(i, userData.get(i));
-			}
-			preparedStatement.executeUpdate();
-			if(kuenstler){
-				preparedStatement = conection.prepareStatement(query2);
-				preparedStatement.setString(1,userData.get(1));
-				preparedStatement.executeUpdate();
-			}
-			preparedStatement.close();
+			u_query.executeUpdate();
 		} catch (SQLException e) {
+			//TODO: think about a proper exception thingy.
+			System.out.println("Fehler bei Nutzereintragung!");
 			e.printStackTrace();
+		}
+
+		if(kuenstler){
+			try {
+				prepStatement = conection.prepareStatement(u_query2);
+				prepStatement.setString(1, userData.get(1));
+				prepStatement.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("Fehler bei Kuenstlereintrag!");
+				e.printStackTrace();
+			}
 		}
 
 	}

@@ -44,8 +44,24 @@ public class AddUserController implements Initializable{
 	private CheckBox cboxArtist;
 	@FXML
 	private void handleAddButtonAction (ActionEvent e){
+
 		AddUserModel.AddUsersData(getUserData(), cboxArtist.isSelected());
 		AddUserModel.addAddressData(txtUsername.getText().trim(), getAddressData());
+		/*
+		System.out.println("UserData:");
+		for (int i=0;i < getUserData().size();i++){
+			System.out.println(i);
+			System.out.println(getUserData().get(i));
+		}
+		System.out.println("AddressData:");
+		for (int i=0;i < getAddressData().size();i++){
+			System.out.println(i);
+			System.out.println(getAddressData().get(i));
+		}*/
+		StatusLabel.setText("Nutzereintragung erfolgreich!");
+		AddBtn.setDisable(true);
+
+
 
 	}
 
@@ -54,6 +70,7 @@ public class AddUserController implements Initializable{
 		try {
 			if(AddUserModel.isUnique(txtUsername.getText().trim())){
 				AddBtn.setDisable(false);
+				StatusLabel.setText("Alles Okay! Bitte Hinzufügen klicken!");
 			} else {
 				StatusLabel.setText("Nutzername existiert bereits!");
 			}
@@ -91,16 +108,17 @@ public class AddUserController implements Initializable{
 
 	/**
 	 * Gets Data from the Textfields and builds an ArrayList out of it
-	 * Order is <b>always</b> country, city, street, number
+	 * Order is <b>always</b>:
+	 * country, city, street, number
 	 *
 	 * @return an ArrayList of Strings with the address data.
 	 */
 
 	private ArrayList<String> getAddressData(){
-		String land = txtUsername.getText().trim();
-		String stadt = txtPassword.getText().trim();
-		String strasse = txtEmail.getText().trim();
-		String hausnummer = txtFirstname.getText().trim();
+		String land = txtCountry.getText().trim();
+		String stadt = txtCity.getText().trim();
+		String strasse = txtStreet.getText().trim();
+		String hausnummer = txtNumber.getText().trim();
 		ArrayList<String> addressData = new ArrayList<String>();
 		addressData.add(land);
 		addressData.add(stadt);

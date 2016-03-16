@@ -22,13 +22,13 @@
       <VBox focusTraversable="true" layoutX="33.0" layoutY="39.0" spacing="30.0">
          <children>
             <TextField fx:id="txtUsername" promptText="Nutzername" />
-            <TextField fx:id="txtFirstname" promptText="Vorname" />
+            <TextField fx:id="txtPassword" promptText="Passwort" />
             <TextField fx:id="txtEmail" promptText="E-Mail" />
          </children>
       </VBox>
       <VBox layoutX="225.0" layoutY="39.0" spacing="30.0">
          <children>
-            <TextField fx:id="txtPassword" promptText="Passwort" />
+            <TextField fx:id="txtFirstname" promptText="Vorname" />
             <TextField fx:id="txtSurname" promptText="Nachname" />
          </children>
       </VBox>
@@ -44,12 +44,12 @@
       <VBox layoutX="32.0" layoutY="262.0" spacing="30.0">
          <children>
             <TextField fx:id="txtStreet" promptText="Straße" />
-            <TextField fx:id="txtCountry" promptText="Land" />
+            <TextField fx:id="txtNumber" promptText="Hausnummer" />
          </children>
       </VBox>
       <VBox layoutX="224.0" layoutY="261.0" spacing="30.0">
          <children>
-            <TextField fx:id="txtNumber" promptText="Hausnummer" />
+            <TextField fx:id="txtCountry" promptText="Land" />
             <TextField fx:id="txtCity" promptText="Stadt" />
          </children>
       </VBox>
