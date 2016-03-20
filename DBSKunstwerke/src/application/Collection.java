@@ -3,40 +3,44 @@ package application;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class Collection {
 
-	private final Integer sammlungID;
-	private final String name;
-	private ArrayList<Integer> Kunstwerke;
+	private final SimpleIntegerProperty sammlungID;
+	private final SimpleStringProperty name;
+	private ArrayList<SimpleIntegerProperty> Kunstwerke = null;
 
 
 
-	public Collection(Integer sammlungID, String name, ArrayList<Integer> kunstwerke) {
+	public Collection(Integer sammlungID, String name, Integer[] kunstwerke) {
 		super();
-		this.sammlungID = sammlungID;
-		this.name = name;
-		Kunstwerke = kunstwerke;
+		this.sammlungID = new SimpleIntegerProperty(sammlungID);
+		this.name = new SimpleStringProperty(name);
+		setKunstwerke(kunstwerke);
 	}
+
 	public Collection(Integer sammlungID, String name){
 		super();
-		this.sammlungID = sammlungID;
-		this.name = name;
+		this.sammlungID = new SimpleIntegerProperty(sammlungID);
+		this.name = new SimpleStringProperty(name);
 		Kunstwerke = null;
 	}
 
-	public Iterator<Integer> getKunstwerke() {
+	public Iterator<SimpleIntegerProperty> getKunstwerke() {
 		return Kunstwerke.iterator();
 	}
 	public void setKunstwerke(Integer[] kunstwerke) {
 		for (Integer k : kunstwerke){
-			this.Kunstwerke.add(k);
+			this.Kunstwerke.add(new SimpleIntegerProperty(k));
 		}
 	}
 	public Integer getSammlungID() {
-		return sammlungID;
+		return sammlungID.get();
 	}
 	public String getName() {
-		return name;
+		return name.get();
 	}
 
 }

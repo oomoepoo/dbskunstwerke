@@ -30,9 +30,9 @@
                   </VBox>
                   <TableView fx:id="openingTable" layoutX="279.0" layoutY="60.0" prefHeight="288.0" prefWidth="317.0">
                     <columns>
-                      <TableColumn prefWidth="116.0" text="Wochentag" />
-                      <TableColumn prefWidth="100.0" text="Von" />
-                        <TableColumn prefWidth="100.0" text="Bis" />
+                      <TableColumn fx:id="op_weekdaycolumn" prefWidth="116.0" text="Wochentag" />
+                      <TableColumn fx:id="op_fromcolumn" prefWidth="100.0" text="Von" />
+                        <TableColumn fx:id="op_tocolumn" prefWidth="100.0" text="Bis" />
                     </columns>
                   </TableView>
                   <VBox layoutX="88.0" layoutY="138.0" spacing="20.0">
@@ -68,9 +68,9 @@
                <children>
                   <TableView fx:id="tableCollection" layoutX="8.0" layoutY="9.0" prefHeight="330.0" prefWidth="540.0">
                      <columns>
-                        <TableColumn prefWidth="239.0" text="Sammlung" />
-                        <TableColumn prefWidth="163.0" text="Seit" />
-                        <TableColumn prefWidth="153.0" text="Bis" />
+                        <TableColumn fx:id="collectionNameColumn" prefWidth="239.0" text="Sammlung" />
+                        <TableColumn fx:id="col_seitColumn" prefWidth="163.0" text="Seit" />
+                        <TableColumn fx:id="col_bisColumn" prefWidth="153.0" text="Bis" />
                      </columns>
                   </TableView>
                </children>
@@ -83,8 +83,8 @@
                <children>
                   <TableView fx:id="tableMComments" layoutX="8.0" layoutY="9.0" prefHeight="238.0" prefWidth="563.0">
                     <columns>
-                      <TableColumn prefWidth="136.0" text="Nutzer" />
-                      <TableColumn prefWidth="391.0" text="Kommentar" />
+                      <TableColumn fx:id="userColumn" prefWidth="136.0" text="Nutzer" />
+                      <TableColumn fx:id="commentColumn" prefWidth="391.0" text="Kommentar" />
                     </columns>
                   </TableView>
                   <HBox layoutX="15.0" layoutY="269.0" spacing="20.0">

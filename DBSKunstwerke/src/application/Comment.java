@@ -1,5 +1,8 @@
 package application;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  * Abstract class for comments
  * It's not intended to actually create instances of this,
@@ -24,9 +27,9 @@ public abstract class Comment {
 	public static final String KID = "KommentarID";
 	public static final String KTEXT = "Kommentartext";
 
-	private String Kommentar;
-	private String Kommentator;
-	private int Ziel;
+	private SimpleStringProperty Kommentar;
+	private SimpleStringProperty Kommentator;
+	private SimpleIntegerProperty Ziel;
 
 	protected Comment (String Text, String Kommentator, Integer Ziel){
 		this.setComment(Text);
@@ -41,27 +44,27 @@ public abstract class Comment {
 	}
 
 	public String getComment() {
-		return Kommentar;
+		return Kommentar.get();
 	}
 
 	public void setComment(String kommentar) {
-		Kommentar = kommentar;
+		Kommentar = new SimpleStringProperty(kommentar);
 	}
 
 	public String getKommentator() {
-		return Kommentator;
+		return Kommentator.get();
 	}
 
 	public void setKommentator(String kommentator) {
-		Kommentator = kommentator;
+		Kommentator = new SimpleStringProperty(kommentator);
 	}
 
 	public int getZiel() {
-		return Ziel;
+		return Ziel.get();
 	}
 
 	public void setZiel(int ziel) {
-		Ziel = ziel;
+		Ziel = new SimpleIntegerProperty(ziel);
 	}
 
 

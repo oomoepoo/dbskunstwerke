@@ -41,9 +41,30 @@ public ObservableList<OpeningTime> create_ot_from_sql(){
 
 }
 
-public ObservableList<Collection> create_col_from_sql() {
+public ObservableList<collection_view> create_col_from_sql() {
+	String col = "Sammlung_ausgestellt_in_Gebaeude";
+	String query = "Select Sammlung.SammlungID, Sammlung.Name,"+col+".von,"+col+".bis from Sammlung"
+			+ "INNER JOIN "+col+" on Sammlung.SammlungID = "+col+".SammlungID"
+			+ "where "+col+".GebaeudeID = ?";
+	ObservableList<collection_view> col_data = FXCollections.observableArrayList();
+	try {
+		PreparedStatement col_query = conection.prepareStatement(query);
+		ResultSet results = null;
+		col_query.setInt(1, MuseumsID);
+		results = col_query.executeQuery();
+		while(results.next()){
+			int sammlungID = results.getInt("SammlungID");
+			String name = results.getString("Name");
+			String von = results.getString("von");
+			String bis = results.getString("bis");
+			col_data.add(new collection_view(sammlungID, name, von, bis));
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 
-	return null;
+	return col_data;
 }
 
 public ObservableList<MuesumsComment> create_com_from_sql() {
