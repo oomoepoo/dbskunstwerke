@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import javafx.scene.control.TableView;
 
 public class MuseumsProfileController implements Initializable{
 	public static int MuseumsID;
+	public static String username;
 	MuseumsProfileModel mprofilemodel = new MuseumsProfileModel(MuseumsID);
 
 	@FXML
@@ -65,6 +67,12 @@ public class MuseumsProfileController implements Initializable{
 		init_tables();
 	}
 
+	@FXML
+	private void handleCommentBtnAction(ActionEvent event){
+		String comment = txtEnterComment.getText();
+		mprofilemodel.add_museum_comment(comment,MuseumsID, username);
+		com_list.add(new MuesumsComment(comment, username, MuseumsID));
+	}
 
 	private void init_tables() {
 		mprofilemodel.create_col_from_sql();
