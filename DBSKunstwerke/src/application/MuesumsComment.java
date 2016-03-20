@@ -6,7 +6,7 @@ public class MuesumsComment extends Comment {
 	public final static String ZCOL = "Museum";
 
 
-	public MuesumsComment(String Text, Integer Kommentator, Integer Ziel) {
+	public MuesumsComment(String Text, String Kommentator, Integer Ziel) {
 		super(Text, Kommentator, Ziel);
 	}
 

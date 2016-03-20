@@ -5,7 +5,7 @@ public class ArtistComment extends Comment {
 	public static final String TIME = "Zeitpunkt";
 	private String Zeitpunkt;
 
-	public ArtistComment(String Text, Integer Kommentator, Integer Ziel, String Zeitpunkt) {
+	public ArtistComment(String Text, String Kommentator, Integer Ziel, String Zeitpunkt) {
 		super(Text, Kommentator, Ziel);
 		this.Zeitpunkt = Zeitpunkt;
 	}

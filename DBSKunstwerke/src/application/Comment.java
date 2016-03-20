@@ -25,10 +25,10 @@ public abstract class Comment {
 	public static final String KTEXT = "Kommentartext";
 
 	private String Kommentar;
-	private int Kommentator;
+	private String Kommentator;
 	private int Ziel;
 
-	protected Comment (String Text, Integer Kommentator, Integer Ziel){
+	protected Comment (String Text, String Kommentator, Integer Ziel){
 		this.setComment(Text);
 		this.setKommentator(Kommentator);
 		this.setZiel(Ziel);
@@ -48,11 +48,11 @@ public abstract class Comment {
 		Kommentar = kommentar;
 	}
 
-	public int getKommentator() {
+	public String getKommentator() {
 		return Kommentator;
 	}
 
-	public void setKommentator(int kommentator) {
+	public void setKommentator(String kommentator) {
 		Kommentator = kommentator;
 	}
 
