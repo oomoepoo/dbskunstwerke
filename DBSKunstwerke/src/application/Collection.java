@@ -3,14 +3,16 @@ package application;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Collection {
 
-	private final SimpleIntegerProperty sammlungID;
-	private final SimpleStringProperty name;
-	private ArrayList<SimpleIntegerProperty> Kunstwerke = null;
+	private final IntegerProperty sammlungID;
+	private final StringProperty name;
+	private ArrayList<IntegerProperty> Kunstwerke = null;
 
 
 
@@ -28,7 +30,7 @@ public class Collection {
 		Kunstwerke = null;
 	}
 
-	public Iterator<SimpleIntegerProperty> getKunstwerke() {
+	public Iterator<IntegerProperty> getKunstwerke() {
 		return Kunstwerke.iterator();
 	}
 	public void setKunstwerke(Integer[] kunstwerke) {
@@ -39,8 +41,15 @@ public class Collection {
 	public Integer getSammlungID() {
 		return sammlungID.get();
 	}
+	public IntegerProperty sammlungIDProperty(){
+		return sammlungID;
+	}
+
 	public String getName() {
 		return name.get();
+	}
+	public StringProperty nameProperty(){
+		return name;
 	}
 
 }

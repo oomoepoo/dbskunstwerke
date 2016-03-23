@@ -38,8 +38,6 @@ public class LoginController implements Initializable {
 	private TextField passField;
 	@FXML
 	private void handleRegisterButtonAction (ActionEvent event){
-		//isConnected.setText("Reg-Button");
-		//AddUserController addUserController  = (AddUserController)loader.getController();
 		try {
 			((Node)event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
@@ -49,6 +47,7 @@ public class LoginController implements Initializable {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("DBS-Kunstwerke: Nutzer hinzufügen");
 			primaryStage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -89,6 +88,7 @@ public class LoginController implements Initializable {
 				Scene scene = new Scene(root);
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 				primaryStage.setScene(scene);
+				primaryStage.setTitle("DBS-Kunstwerke: "+user);
 				primaryStage.show();
 
 
@@ -113,6 +113,7 @@ public class LoginController implements Initializable {
 			isConnected.setText("Verbunden");
 		}
 		//FX-Magic: Disable Login-Button until Fields have been filled with text
+
 		BooleanBinding booleanBind = userField.textProperty().isEmpty().or(passField.textProperty().isEmpty());
 		loginBtn.disableProperty().bind(booleanBind);
 

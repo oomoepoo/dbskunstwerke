@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextArea;
 
 import javafx.scene.control.TableView;
@@ -85,16 +84,16 @@ public class MuseumsProfileController implements Initializable{
 
 	}
 	private void init_columns() {
-		op_weekdaycolumn.setCellValueFactory(new PropertyValueFactory<OpeningTime, String>("weekday"));
-		op_fromcolumn.setCellValueFactory(new PropertyValueFactory<OpeningTime, String>("von"));
-		op_tocolumn.setCellValueFactory(new PropertyValueFactory<OpeningTime, String>("bis"));
+		op_weekdaycolumn.setCellValueFactory(cellData -> cellData.getValue().weekdayProperty());
+		op_fromcolumn.setCellValueFactory(cellData -> cellData.getValue().vonProperty());
+		op_tocolumn.setCellValueFactory(cellData -> cellData.getValue().bisProperty());
 
-		collectionNameColumn.setCellValueFactory(new PropertyValueFactory<collection_view, String>("name"));
-		col_bisColumn.setCellValueFactory(new PropertyValueFactory<collection_view, String>("bis"));
-		col_seitColumn.setCellValueFactory(new PropertyValueFactory<collection_view, String>("von"));
+		collectionNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+		col_bisColumn.setCellValueFactory(cellData -> cellData.getValue().bisProperty());
+		col_seitColumn.setCellValueFactory(cellData -> cellData.getValue().vonProperty());
 
-		commentColumn.setCellValueFactory(new PropertyValueFactory<MuesumsComment, String>("Kommentar"));
-		userColumn.setCellValueFactory(new PropertyValueFactory<MuesumsComment, String>("Kommentator"));
+		commentColumn.setCellValueFactory(cellData -> cellData.getValue().kommentarProperty());
+		userColumn.setCellValueFactory(cellData -> cellData.getValue().kommentatorProperty());
 
 	}
 	public void set_data(String username, int mid){

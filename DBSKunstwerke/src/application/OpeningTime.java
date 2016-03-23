@@ -1,12 +1,13 @@
 package application;
 import application.Weekdays;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class OpeningTime {
 
-	private SimpleStringProperty weekday;
-	private SimpleStringProperty von;
-	private SimpleStringProperty bis;
+	private StringProperty weekday;
+	private StringProperty von;
+	private StringProperty bis;
 
 	public OpeningTime(Weekdays Wochentag, String von, String bis){
 		this.weekday = new SimpleStringProperty(Wochentag.toString());
@@ -20,6 +21,10 @@ public class OpeningTime {
 		return weekday.toString();
 	}
 
+	public StringProperty weekdayProperty(){
+		return weekday;
+	}
+
 	public String getVon() {
 		return von.get();
 	}
@@ -28,12 +33,20 @@ public class OpeningTime {
 		this.von.set(von);
 	}
 
+	public StringProperty vonProperty(){
+		return von;
+	}
+
 	public String getBis() {
 		return bis.get();
 	}
 
 	public void setBis(String bis) {
 		this.bis.set(bis);
+	}
+
+	public StringProperty bisProperty(){
+		return bis;
 	}
 
 }

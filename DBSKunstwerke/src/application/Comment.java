@@ -1,7 +1,9 @@
 package application;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  * Abstract class for comments
@@ -27,14 +29,14 @@ public abstract class Comment {
 	public static final String KID = "KommentarID";
 	public static final String KTEXT = "Kommentartext";
 
-	private SimpleStringProperty Kommentar;
-	private SimpleStringProperty Kommentator;
-	private SimpleIntegerProperty Ziel;
+	private StringProperty kommentar;
+	private StringProperty kommentator;
+	private IntegerProperty ziel;
 
 	protected Comment (String Text, String Kommentator, Integer Ziel){
-		this.setComment(Text);
-		this.setKommentator(Kommentator);
-		this.setZiel(Ziel);
+		this.kommentar = new SimpleStringProperty(Text);
+		this.kommentator = new SimpleStringProperty(Kommentator);
+		this.ziel = new SimpleIntegerProperty(Ziel);
 
 	}
 
@@ -44,27 +46,37 @@ public abstract class Comment {
 	}
 
 	public String getComment() {
-		return Kommentar.get();
+		return kommentar.get();
 	}
 
 	public void setComment(String kommentar) {
-		Kommentar = new SimpleStringProperty(kommentar);
+		this.kommentar.set(kommentar);
+	}
+	public StringProperty kommentarProperty(){
+		return kommentar;
 	}
 
 	public String getKommentator() {
-		return Kommentator.get();
+		return kommentator.get();
 	}
 
 	public void setKommentator(String kommentator) {
-		Kommentator = new SimpleStringProperty(kommentator);
+		this.kommentator.set(kommentator);
+	}
+
+	public StringProperty kommentatorProperty(){
+		return kommentator;
 	}
 
 	public int getZiel() {
-		return Ziel.get();
+		return ziel.get();
 	}
 
 	public void setZiel(int ziel) {
-		Ziel = new SimpleIntegerProperty(ziel);
+		this.ziel.set(ziel);
+	}
+	public IntegerProperty zielProperty(){
+		return ziel;
 	}
 
 
