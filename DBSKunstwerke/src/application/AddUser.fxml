@@ -15,7 +15,7 @@
    <children>
       <ButtonBar layoutX="12.0" layoutY="451.0" prefHeight="26.0" prefWidth="345.0">
         <buttons>
-            <Button fx:id="BackBtn" memonicParsing="false" text="Zum Login" onAction="#handleBackButtonAction"/>
+            <Button fx:id="BackBtn" mnemonicParsing="false" text="Zum Login" onAction="#handleBackButtonAction"/>
             <Button fx:id="CheckBtn" mnemonicParsing="false" onAction="#handleCheckButtonAction" text="Überprüfen" />
           <Button fx:id="AddBtn" disable="true" mnemonicParsing="false" onAction="#handleAddButtonAction" text="Hinzufügen" />
         </buttons>

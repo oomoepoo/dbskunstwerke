@@ -94,6 +94,7 @@ public class MuseumsProfileModel {
 			add_comment_query.setString(1, comment);
 			add_comment_query.setString(2, username);
 			add_comment_query.setInt(3, museum);
+			add_comment_query.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

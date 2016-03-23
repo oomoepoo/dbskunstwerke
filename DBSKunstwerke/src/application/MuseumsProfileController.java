@@ -16,8 +16,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TableView;
 
 public class MuseumsProfileController implements Initializable{
-	public static int MuseumsID;
-	public static String username;
+	public int MuseumsID;
+	public String username;
 	MuseumsProfileModel mprofilemodel = new MuseumsProfileModel(MuseumsID);
 
 	@FXML
@@ -96,6 +96,10 @@ public class MuseumsProfileController implements Initializable{
 		commentColumn.setCellValueFactory(new PropertyValueFactory<MuesumsComment, String>("Kommentar"));
 		userColumn.setCellValueFactory(new PropertyValueFactory<MuesumsComment, String>("Kommentator"));
 
+	}
+	public void set_data(String username, int mid){
+		this.username = username;
+		this.MuseumsID = mid;
 	}
 
 }
