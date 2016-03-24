@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -23,6 +24,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 /**
  * Controller Class for the User Window.
@@ -30,9 +34,15 @@ import javafx.stage.Stage;
  */
 public class UserController implements Initializable{
 	Connection conection;
-	public String user;
+	private Context context;
 	@FXML
 	private Label userlabel;
+	@FXML
+	private Label labelFName;
+	@FXML
+	private Label labelSName;
+	@FXML
+	private VBox buttonBox;
 	@FXML
 	private TextField txtSearch;
 	@FXML
@@ -58,19 +68,29 @@ public class UserController implements Initializable{
 
 	public ObservableList<Bestellung> bestellungs_table = FXCollections.observableArrayList(new Bestellung(1, "2015-02-02 16:00:00", "2015-02-04 16:00:00", 60));
 
-
+	public UserController(Context context){
+		this.context = context;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println(user);
 		create_bestellung_from_sql();
-		tableabdruck.setItems(bestellungs_table);
 		init_tables();
+		setup_userlabels();
 
 	}
 
 
+	private void setup_userlabels() {
+		userlabel.setText(context.getNutzer().getUsername());
+		userlabel.setFont(Font.font("System", FontWeight.BOLD, 14));
+		labelSName.setText(context.getNutzer().getNachname());
+		labelFName.setText(context.getNutzer().getVorname());
+
+	}
+
 	public void init_tables(){
+		tableabdruck.setItems(bestellungs_table);
 		abd_abdruckid.setCellValueFactory(cellData -> cellData.getValue().abdruckIDProperty().asObject());
 		abd_bestellt.setCellValueFactory(cellData -> cellData.getValue().bestelldatumProperty());
 		abd_geliefert.setCellValueFactory(cellData -> cellData.getValue().lieferdatumProperty());
@@ -79,10 +99,6 @@ public class UserController implements Initializable{
 
 	}
 
-	@FXML
-	private void handleResultsButtonAction(ActionEvent ae){
-		tableabdruck.setItems(bestellungs_table);
-	}
 
 	private void create_bestellung_from_sql() {
 		conection = SQLiteConection.Connector();
@@ -97,7 +113,7 @@ public class UserController implements Initializable{
 				+ "inner join Abdruck on Benutzer_bestellt_Abdruck.AbdruckID = Abdruck.AbdruckID where Benutzer_bestellt_Abdruck.Benutzername = ?";
 		try {
 			bestellungs_query = conection.prepareStatement(query);
-			bestellungs_query.setString(1, "vikbo");
+			bestellungs_query.setString(1, context.getNutzer().getUsername());
 			results = bestellungs_query.executeQuery();
 			while (results.next()){
 				int abid = results.getInt("AbdruckID");
@@ -108,17 +124,11 @@ public class UserController implements Initializable{
 				System.out.println(bestellungs_table.size());
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
-	public void getUsername(String user) {
-		userlabel.setText(user);
-		this.user=user;
-
-	}
 
 	public void SignOut (ActionEvent event){
 		((Node)event.getSource()).getScene().getWindow().hide();
@@ -146,6 +156,55 @@ public class UserController implements Initializable{
 	}
 	@FXML
 	private void handleSearchButtonAction (ActionEvent ae){
+		String query_artists = "Select Benutzername, Vorname, Nachname, Adresse, E-Mail from Benutzer inner join Kuenstler on Benutzer.Benutzername = Kuenstler.Benutzername where "
+				+ "Benutzer.Vorname like ? or Benutzer.Nachname like ?";
+		String query_museums = "Select *  from Gebauede inner join Mueseum on Gebaeude.GebauedeID=Museum.GebaeudeID where Gebaeude.Name like ?";
+		String query_ateliers = "Select *  from Gebauede inner join Atelier on Gebaeude.GebauedeID=Atelier.GebaeudeID where Gebaeude.Name like ?";
+		String query_artworks = "Select * from Kunstwerke where Name like ?";
+		String search = txtSearch.getText()+"%";
+		ArrayList<String> querys = new ArrayList<String>();
+		ArrayList<ResultSet> results = new ArrayList<ResultSet>();
+		ArrayList<PreparedStatement> s_querys = new ArrayList<PreparedStatement>();
+		if (cboxArtists.isSelected()){
+			querys.add(query_artists);
+		}
+		if (cboxArtworks.isSelected()){
+			querys.add(query_artworks);
+		}
+		if (cboxAtelliers.isSelected()){
+			querys.add(query_ateliers);
+		}
+		if (cboxMuseums.isSelected()){
+			querys.add(query_museums);
+		}
+		for (String q : querys){
+			try{
+				s_querys.add(conection.prepareStatement(q));
+			} catch(SQLException sqle) {
+				System.out.println("Fehler bei Statement: "+q);
+				sqle.printStackTrace();
+			}
+		}
+		for (PreparedStatement ps : s_querys){
+			try {
+				ps.setString(1, search);
+				if (ps.getParameterMetaData().getParameterCount()>1){
+					ps.setString(2, search);
+				}
+
+			} catch (SQLException sql){
+				System.out.println("Fehler beim Vorbereite von Statement: "+ps.toString());
+				sql.printStackTrace();
+			}
+			try {
+				results.add(ps.executeQuery());
+			} catch (SQLException e) {
+				System.out.println("Fehler beim Ausführen von Statement: "+ps.toString());
+				e.printStackTrace();
+			}
+
+		}
 
 	}
+
 }

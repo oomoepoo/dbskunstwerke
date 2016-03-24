@@ -3,7 +3,6 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -63,8 +62,10 @@ public class AddUserController implements Initializable{
 	@FXML
 	private void handleAddButtonAction (ActionEvent e){
 
-		AddUserModel.AddUsersData(getUserData(), cboxArtist.isSelected());
-		AddUserModel.addAddressData(txtUsername.getText().trim(), getAddressData());
+		User userdata = getUserData();
+		Adresse adressdata = getAddressData();
+		AddUserModel.AddUsersData(userdata, cboxArtist.isSelected());
+		AddUserModel.addAddressData(userdata.getUsername(), adressdata);
 		/*
 		System.out.println("UserData:");
 		for (int i=0;i < getUserData().size();i++){
@@ -144,19 +145,19 @@ public class AddUserController implements Initializable{
 	 *
 	 * @return an ArrayList of Strings with the userdata.
 	 */
-	private ArrayList<String> getUserData(){
+	private User getUserData(){
 		String username = txtUsername.getText().trim();
 		String password = txtPassword.getText().trim();
 		String email = txtEmail.getText().trim();
 		String vorname = txtFirstname.getText().trim();
 		String nachname = txtSurname.getText().trim();
-		ArrayList<String> userData = new ArrayList<String>();
+		/*ArrayList<String> userData = new ArrayList<String>();
 		userData.add(username);
 		userData.add(password);
 		userData.add(email);
 		userData.add(vorname);
-		userData.add(nachname);
-		return userData;
+		userData.add(nachname);*/
+		return new User(username, vorname, nachname, password, null, email);
 
 
 
@@ -164,24 +165,26 @@ public class AddUserController implements Initializable{
 	}
 
 	/**
-	 * Gets Data from the Textfields and builds an ArrayList out of it
-	 * Order is <b>always</b>:
-	 * country, city, street, number
+	 * Gets Data from the Textfields and builds an Adress object out of it
+	 * Notice: adressID is 0 for this one, cause it isn't generated until
+	 * it's actually in the database (auto-increment.)
+	 * Still in the constructor for completeness' sake.
 	 *
-	 * @return an ArrayList of Strings with the address data.
+	 * @return an Adress object.
+	 *
 	 */
 
-	private ArrayList<String> getAddressData(){
+	private Adresse getAddressData(){
 		String land = txtCountry.getText().trim();
 		String stadt = txtCity.getText().trim();
 		String strasse = txtStreet.getText().trim();
 		String hausnummer = txtNumber.getText().trim();
-		ArrayList<String> addressData = new ArrayList<String>();
+		/*ArrayList<String> addressData = new ArrayList<String>();
 		addressData.add(land);
 		addressData.add(stadt);
 		addressData.add(strasse);
-		addressData.add(hausnummer);
-		return addressData;
+		addressData.add(hausnummer);*/
+		return new Adresse(0, land, stadt, strasse, hausnummer);
 
 
 

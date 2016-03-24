@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
 	public LogInModel loginModel = new LogInModel();
+	Context currentContext = new Context();
 
 
 	@FXML
@@ -71,6 +72,9 @@ public class LoginController implements Initializable {
 		try {
 			if (loginModel.isLogIn(user, pass)){
 				isConnected.setText("Log-In korrekt!");
+				User u_object = loginModel.getUserfromsql(user, pass);
+				currentContext.setNutzer(u_object);
+				URL url = getClass().getResource("/application/User.fxml");
 				//hide the old window (FX-Magic, for all I know :v)
 				((Node)event.getSource()).getScene().getWindow().hide();
 
@@ -82,9 +86,10 @@ public class LoginController implements Initializable {
 
 				Stage primaryStage = new Stage();
 				FXMLLoader loader = new FXMLLoader();
-				Pane root = loader.load(getClass().getResource("/application/User.fxml").openStream());
-				UserController userController = (UserController)loader.getController();
-				userController.getUsername(user);
+				UserController userController = new UserController(currentContext);
+				loader.setController(userController);
+				loader.setLocation(url);
+				Pane root = loader.load();
 				Scene scene = new Scene(root);
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 				primaryStage.setScene(scene);

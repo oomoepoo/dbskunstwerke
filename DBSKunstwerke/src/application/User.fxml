@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutX="9.0" layoutY="6.0" spacing="10.0">
          <children>
@@ -20,6 +20,12 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <Label fx:id="labelFName" prefHeight="26.0" prefWidth="161.0" text="Vorname">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelSName" prefHeight="26.0" prefWidth="140.0" text="Nachname" />
             <Button mnemonicParsing="false" onAction="#SignOut" text="Ausloggen" />
          </children>
       </HBox>
@@ -41,6 +47,5 @@
             <TableColumn fx:id="abd_price" prefWidth="102.0" text="Preis" />
         </columns>
       </TableView>
-      <Button layoutX="203.0" layoutY="144.0" mnemonicParsing="false" onAction="#handleResultsButtonAction" text="show results" />
    </children>
 </AnchorPane>
