@@ -73,7 +73,9 @@ public class LoginController implements Initializable {
 			if (loginModel.isLogIn(user, pass)){
 				isConnected.setText("Log-In korrekt!");
 				User u_object = loginModel.getUserfromsql(user, pass);
+				Adresse a_object = loginModel.getAddressfromSQL(user);
 				currentContext.setNutzer(u_object);
+				currentContext.setAddress(a_object);
 				URL url = getClass().getResource("/application/User.fxml");
 				//hide the old window (FX-Magic, for all I know :v)
 				((Node)event.getSource()).getScene().getWindow().hide();

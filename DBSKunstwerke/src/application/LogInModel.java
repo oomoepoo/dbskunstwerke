@@ -101,4 +101,31 @@ public class LogInModel {
 		return u_object;
 	}
 
+	public Adresse getAddressfromSQL(String user){
+		Adresse a_object = null;
+
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String query = "Select AdressenID, Land, Stadt, Strasse, Hausnummer from Adresse inner join Benutzer on Adresse.AdressenID = Benutzer.Adresse where Benutzer.Benutzername = ?";
+		try {
+			preparedStatement = conection.prepareStatement(query);
+			preparedStatement.setString(1, user);
+
+			resultSet = preparedStatement.executeQuery();
+
+			while(resultSet.next()){
+				int aID = resultSet.getInt("AdressenID");
+				String country = resultSet.getString("Land");
+				String city = resultSet.getString("Stadt");
+				String street = resultSet.getString("Strasse");
+				String hnumber = resultSet.getString("Hausnummer");
+
+				a_object = new Adresse(aID, country, city, street, hnumber);
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return a_object;
+	}
+
 }

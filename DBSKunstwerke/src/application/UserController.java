@@ -42,6 +42,14 @@ public class UserController implements Initializable{
 	@FXML
 	private Label labelSName;
 	@FXML
+	private Label labelEMail;
+	@FXML
+	private Label labelStreet;
+	@FXML
+	private Label labelCountry;
+	@FXML
+	private Label labelCity;
+	@FXML
 	private VBox buttonBox;
 	@FXML
 	private TextField txtSearch;
@@ -86,7 +94,10 @@ public class UserController implements Initializable{
 		userlabel.setFont(Font.font("System", FontWeight.BOLD, 14));
 		labelSName.setText(context.getNutzer().getNachname());
 		labelFName.setText(context.getNutzer().getVorname());
-
+		labelEMail.setText(context.getNutzer().getEmail());
+		labelCity.setText(context.getAddress().getCity());
+		labelCountry.setText(context.getAddress().getCountry());
+		labelStreet.setText(context.getAddress().getStreet() +" "+context.getAddress().getHnumber());
 	}
 
 	public void init_tables(){

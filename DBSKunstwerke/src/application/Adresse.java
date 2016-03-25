@@ -24,6 +24,14 @@ public class Adresse {
 		this.hnumber = new SimpleStringProperty(hnumber);
 	}
 
+	public Adresse() {
+		this.aID = new SimpleIntegerProperty(0);
+		this.country = new SimpleStringProperty(null);
+		this.city = new SimpleStringProperty(null);
+		this.street = new SimpleStringProperty(null);
+		this.hnumber = new SimpleStringProperty(null);
+	}
+
 	public Integer getaID() {
 		return aID.get();
 	}

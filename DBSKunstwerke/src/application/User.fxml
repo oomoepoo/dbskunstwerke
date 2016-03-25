@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -29,8 +30,11 @@
             <Button mnemonicParsing="false" onAction="#SignOut" text="Ausloggen" />
          </children>
       </HBox>
-      <TextField id="txtSearch" fx:id="txtSearch" layoutX="-6.0" layoutY="200.0" text="Suche nach..." />
-      <VBox layoutX="12.0" layoutY="234.0" spacing="10.0">
+      <TextField id="txtSearch" fx:id="txtSearch" layoutX="5.0" layoutY="200.0" text="Suche nach...">
+         <tooltip>
+            <Tooltip text="Sucht nach ... im Namen" />
+         </tooltip></TextField>
+      <VBox fx:id="buttonBox" layoutX="12.0" layoutY="234.0" spacing="10.0">
          <children>
             <CheckBox id="cbMuseen" fx:id="cboxMuseums" mnemonicParsing="false" text="Museen" />
             <CheckBox id="cbArtists" fx:id="cboxArtists" mnemonicParsing="false" text="Künstlern" />
@@ -47,5 +51,33 @@
             <TableColumn fx:id="abd_price" prefWidth="102.0" text="Preis" />
         </columns>
       </TableView>
+      <HBox layoutX="14.0" layoutY="58.0" spacing="10.0">
+         <children>
+            <Label fx:id="labelEMail" prefHeight="26.0" prefWidth="180.0" text="E-Mail">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelCountry" prefHeight="26.0" prefWidth="161.0" text="Land">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="14.0" layoutY="102.0" spacing="10.0">
+         <children>
+            <Label fx:id="labelStreet" prefHeight="26.0" prefWidth="180.0" text="Straße">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelCity" prefHeight="26.0" prefWidth="161.0" text="Stadt">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
