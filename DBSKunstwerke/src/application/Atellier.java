@@ -10,13 +10,22 @@ public class Atellier extends Building {
 	private int ID;
 	private ArrayList<OpeningTime> openingtimes;
 
-	public Atellier(String country, String street, String city, String hnumber, String name, int ID, String[] owned_by, OpeningTime openings) {
+	public Atellier(String country, String street, String city, String hnumber, String name, int ID, OpeningTime openings, String...owned_by) {
 		super(country, street, city, hnumber);
 		this.setName(name);
 		this.setID(ID);
 		initialize_ownery(owned_by);
+	}
 
-		// TODO Auto-generated constructor stub
+
+
+	public Atellier(String country, String street, String city, String hnumber, String name2, Integer aid,
+			String...owners) {
+		super(country, street, city, hnumber);
+		this.name = name2;
+		this.ID = aid;
+		initialize_ownery(owners);
+
 	}
 
 
@@ -57,7 +66,7 @@ public class Atellier extends Building {
 		owned_by.add(owner);
 	}
 
-	private void initialize_ownery(String[] owners) {
+	private void initialize_ownery(String...owners) {
 		for (String owner : owners){
 			owned_by.add(owner);
 

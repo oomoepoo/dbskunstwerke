@@ -13,6 +13,7 @@ public class User {
 	private StringProperty nachname;
 	private StringProperty passwort;
 	private IntegerProperty adressID;
+	private Adresse adress;
 	private StringProperty email;
 
 	public User(String username, String vorname, String nachname, String passwort,
@@ -101,6 +102,14 @@ public class User {
 		return email;
 	}
 
+
+	public Adresse getAdress() {
+		return adress;
+	}
+
+	public void setAdress(Adresse adress) {
+		this.adress = adress;
+	}
 
 	public ArrayList<String> getEverything(){
 		ArrayList<String> everything = new ArrayList<String>();
