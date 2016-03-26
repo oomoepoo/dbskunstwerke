@@ -76,6 +76,9 @@ public class UserController implements Initializable{
 
 	public ObservableList<Bestellung> bestellungs_table = FXCollections.observableArrayList(new Bestellung(1, "2015-02-02 16:00:00", "2015-02-04 16:00:00", 60));
 
+	Bestellung ch_bestellung = tableabdruck.getSelectionModel().getSelectedItem();
+
+
 	public UserController(Context context){
 		this.context = context;
 	}
@@ -165,6 +168,7 @@ public class UserController implements Initializable{
 		primaryStage.show();
 
 	}
+
 	@FXML
 	private void handleSearchButtonAction (ActionEvent ae){
 		String query_artists = "Select Benutzername, Vorname, Nachname, Adresse, E-Mail from Benutzer inner join Kuenstler on Benutzer.Benutzername = Kuenstler.Benutzername where "
@@ -213,6 +217,7 @@ public class UserController implements Initializable{
 				System.out.println("Fehler beim Ausführen von Statement: "+ps.toString());
 				e.printStackTrace();
 			}
+
 
 		}
 

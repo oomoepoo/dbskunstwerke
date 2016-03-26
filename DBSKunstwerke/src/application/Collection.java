@@ -1,7 +1,6 @@
 package application;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -12,32 +11,45 @@ public class Collection {
 
 	private final IntegerProperty sammlungID;
 	private final StringProperty name;
-	private ArrayList<IntegerProperty> Kunstwerke = null;
+	private ArrayList<StringProperty> Kunstwerke = null;
+	private StringProperty place;
 
 
 
-	public Collection(Integer sammlungID, String name, Integer[] kunstwerke) {
+	public Collection(Integer sammlungID, String name, String...kunstwerke) {
 		super();
 		this.sammlungID = new SimpleIntegerProperty(sammlungID);
 		this.name = new SimpleStringProperty(name);
-		setKunstwerke(kunstwerke);
+		for (String k : kunstwerke){
+			this.Kunstwerke.add(new SimpleStringProperty(k));
+		}
 	}
-
+/*
 	public Collection(Integer sammlungID, String name){
 		super();
 		this.sammlungID = new SimpleIntegerProperty(sammlungID);
 		this.name = new SimpleStringProperty(name);
-		Kunstwerke = null;
+		this.Kunstwerke = null;
+	}
+*/
+	public ArrayList<String> getKunstwerke() {
+		ArrayList<String> s_kunstwerke = new ArrayList<String>();
+		for(StringProperty k : this.Kunstwerke){
+			s_kunstwerke.add(k.get());
+		}
+		return s_kunstwerke;
 	}
 
-	public Iterator<IntegerProperty> getKunstwerke() {
-		return Kunstwerke.iterator();
-	}
-	public void setKunstwerke(Integer[] kunstwerke) {
-		for (Integer k : kunstwerke){
-			this.Kunstwerke.add(new SimpleIntegerProperty(k));
+	public void setKunstwerke(String...kunstwerke) {
+		for (String k : kunstwerke){
+			this.Kunstwerke.add(new SimpleStringProperty(k));
 		}
 	}
+
+	public ArrayList<StringProperty> getkunstwerkeProperty(){
+		return Kunstwerke;
+	}
+
 	public Integer getSammlungID() {
 		return sammlungID.get();
 	}
@@ -52,4 +64,15 @@ public class Collection {
 		return name;
 	}
 
+	public String getPlace(){
+		return place.get();
+	}
+
+	public void setPlace(String place){
+		this.place.set(place);
+	}
+
+	public StringProperty getplaceProperty(){
+		return place;
+	}
 }

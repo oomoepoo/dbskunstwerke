@@ -1,29 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
     <Tab text="Profil">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        <AnchorPane fx:id="tview_artstyles" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <HBox layoutX="6.0" layoutY="35.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="labelFName" prefHeight="35.0" prefWidth="90.0" text="Name">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelLName" prefHeight="35.0" prefWidth="90.0" text="Nachname">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox layoutX="5.0" layoutY="201.0" prefHeight="36.0" prefWidth="298.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="labelStreet" prefHeight="35.0" prefWidth="90.0" text="Straße">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelCity" prefHeight="35.0" prefWidth="90.0" text="Stadt">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelCountry" prefHeight="35.0" prefWidth="90.0" text="Land">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
+                  <Label layoutX="369.0" layoutY="123.0" text="Bevorzugte Kunststile:" />
+                  <HBox layoutX="7.0" layoutY="117.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="labelUser" prefHeight="35.0" prefWidth="111.0" text="Username">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelEMail" prefHeight="35.0" prefWidth="115.0" text="E-Mail">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
+                  <TableView fx:id="tviewArtstyles" layoutX="368.0" layoutY="146.0" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="ap_nameColumn" prefWidth="199.0" text="Kunststilname" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
       </content>
     </Tab>
     <Tab text="Kunstwerke">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tviewArtworks" layoutX="28.0" layoutY="16.0" prefHeight="326.0" prefWidth="518.0">
+                    <columns>
+                      <TableColumn fx:id="aw_nameColumn" prefWidth="174.0" text="Name" />
+                      <TableColumn fx:id="aw_styleColumn" minWidth="3.0" prefWidth="191.0" text="Stilart" />
+                        <TableColumn fx:id="aw_yearColum" prefWidth="150.0" text="Entstehungsjahr" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
       </content>
     </Tab>
       <Tab text="Atelier">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tviewOpeningtimes" layoutX="249.0" layoutY="49.0" prefHeight="138.0" prefWidth="341.0">
+                    <columns>
+                      <TableColumn fx:id="aa_opdayColumn" prefWidth="102.0" text="Tag" />
+                      <TableColumn fx:id="aa_vonColumn" prefWidth="89.0" text="Von" />
+                        <TableColumn fx:id="aa_bisColumn" prefWidth="108.0" text="Bis" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="249.0" layoutY="10.0" prefHeight="29.0" prefWidth="137.0" text="Öffnungszeiten:" />
+                  <Label fx:id="labelAteliername" layoutX="22.0" layoutY="17.0" text="Ateliername">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Group layoutX="303.0" layoutY="254.0">
+                     <children>
+                        <HBox layoutX="1.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="labelAStreet" prefHeight="25.0" prefWidth="97.0" text="Straße">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelACity" prefHeight="28.0" prefWidth="65.0" text="Stadt">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label fx:id="labelACountry" layoutY="39.0" prefHeight="27.0" prefWidth="57.0" text="Land">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
+                  <TableView fx:id="tviewCollections" layoutX="18.0" layoutY="152.0" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="aa_cnameColumn" prefWidth="198.0" text="Sammlungsname" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="22.0" layoutY="118.0" text="Gastierende Sammlungen:">
+                     <font>
+                        <Font name="System Italic" size="13.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
         </content>
       </Tab>
       <Tab text="Kommentare">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="414.0" prefWidth="600.0">
+               <children>
+                  <TextArea fx:id="tfieldKommentar" layoutX="18.0" layoutY="277.0" prefHeight="82.0" prefWidth="422.0" text="Kommentartext" />
+                  <TableView fx:id="tviewArtistComment" layoutX="20.0" layoutY="14.0" prefHeight="252.0" prefWidth="565.0">
+                    <columns>
+                      <TableColumn fx:id="ac_userColumn" prefWidth="118.0" text="Nutzer" />
+                      <TableColumn fx:id="ac_commentColumn" prefWidth="311.0" text="Kommetar" />
+                        <TableColumn fx:id="ac_timestampColumn" prefWidth="135.0" text="Zeitpunkt" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="btnSendComment" layoutX="454.0" layoutY="277.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="127.0" text="Absenden" />
+               </children></AnchorPane>
         </content>
       </Tab>
   </tabs>
