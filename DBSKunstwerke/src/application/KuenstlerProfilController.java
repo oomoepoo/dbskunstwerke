@@ -14,7 +14,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-
+/**
+ * Controller class for the Artist's profile
+ * Handles all kinds of Labels and a bunch of tables.
+ *
+ * Please note: Needs to be called via the custom constructor, because we
+ * need some initialized data for Comments and some labels.
+ *
+ *
+ * @author jan
+ *
+ */
 public class KuenstlerProfilController implements Initializable{
 	KuenstlerProfilModel kpm;
 	private String nutzer;
@@ -88,8 +98,15 @@ public class KuenstlerProfilController implements Initializable{
 	public ObservableList<Collection> collectiontable = kpm.getCollectionfromSQL();
 	public ObservableList<ArtistComment> acommenttable = kpm.getArtistCommentsfromSQL();
 
+	/**
+	 * Constructor for the Controller class
+	 * Also initializes the Model class with some initial values.
+	 *
+	 * @param benutzername the user visiting this profile
+	 * @param kuenstlername the artist whose profile is visited
+	 */
 	public KuenstlerProfilController(String benutzername, String kuenstlername) {
-		this.kpm = new KuenstlerProfilModel(benutzername, kuenstlername);
+		this.kpm = new KuenstlerProfilModel(kuenstlername);
 		this.nutzer = benutzername; //Der Nutzer, der auf das Profil zugreift.
 		this.kuenstler = kuenstlername; //Der Kuenstler, dessen Profil angesehen wird.
 	}
@@ -101,6 +118,9 @@ public class KuenstlerProfilController implements Initializable{
 		init_tables();
 
 	}
+	/**
+	 * Connects all the tables with their respective {@link ObservableList}.
+	 */
 	private void init_tables() {
 		tviewArtstyles.setItems(astyletable);
 		tviewArtistComment.setItems(acommenttable);
@@ -108,8 +128,11 @@ public class KuenstlerProfilController implements Initializable{
 		tviewCollections.setItems(collectiontable);
 		tviewOpeningtimes.setItems(otimetable);
 	}
+	/**
+	 * Sets the CellValueFactory for all the various table columns present in this window.
+	 */
+
 	private void init_tablecells() {
-		//
 		ap_nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(0)));
 
 		aw_nameColumn.setCellValueFactory(cellData -> cellData.getValue().getnameProperty());
@@ -126,6 +149,9 @@ public class KuenstlerProfilController implements Initializable{
 		 ac_timestampColumn.setCellValueFactory(cellData -> cellData.getValue().getzeitpunktProperty());
 
 	}
+	/**
+	 * Initializes the various labels related to the workshop
+	 */
 	private void init_atelierlabels() {
 		Atellier atelier = kpm.getAtellier();
 		String street = atelier.getStreet() + " "+atelier.getHnumber();
@@ -135,6 +161,9 @@ public class KuenstlerProfilController implements Initializable{
 		labelAStreet.setText(street);
 
 	}
+	/**
+	 * initializes labels related to the artist.
+	 */
 	private void init_userlabels() {
 		User user = kpm.getUser();
 		Adresse adresse = user.getAdress();

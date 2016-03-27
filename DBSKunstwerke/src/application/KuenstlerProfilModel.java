@@ -11,18 +11,16 @@ import javafx.collections.ObservableList;
 
 public class KuenstlerProfilModel {
 	private String nutzer;
-	private String visitor;
 	private Connection connection;
 	private DataModel daten;
 
-	public KuenstlerProfilModel(String benutzername, String kuenstlername){
+	public KuenstlerProfilModel(String kuenstlername){
 		connection = SQLiteConection.Connector();
 		if (connection == null) {
 			System.out.println("Verbindung nicht erfolgreich!");
 			System.exit(1);
 		}
 		this.nutzer = kuenstlername;
-		this.visitor = benutzername;
 		this.daten = generateDatafromSQL();
 	}
 
