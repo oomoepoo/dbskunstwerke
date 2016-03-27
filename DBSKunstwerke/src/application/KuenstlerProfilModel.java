@@ -4,22 +4,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class KuenstlerProfilModel {
 	private String nutzer;
+	private String visitor;
 	private Connection connection;
 	private DataModel daten;
 
-	public KuenstlerProfilModel(String benutzername){
+	public KuenstlerProfilModel(String benutzername, String kuenstlername){
 		connection = SQLiteConection.Connector();
 		if (connection == null) {
 			System.out.println("Verbindung nicht erfolgreich!");
 			System.exit(1);
 		}
-		this.nutzer = benutzername;
+		this.nutzer = kuenstlername;
+		this.visitor = benutzername;
 		this.daten = generateDatafromSQL();
 	}
 
@@ -99,12 +102,17 @@ public class KuenstlerProfilModel {
 			e.printStackTrace();
 		}
 		return new DataModel(user, atelier);
-
-
-
 	}
-	public ObservableList<String> getArtStylesfromSQL() {
-		ObservableList<String> ArtstyleList = FXCollections.observableArrayList();
+
+	public User getUser(){
+		return daten.getUser();
+	}
+	public Atellier getAtellier(){
+		return daten.getAtelier();
+	}
+
+	public ObservableList<ObservableList<String>> getArtStylesfromSQL() {
+		ObservableList<ObservableList<String>> items = FXCollections.observableArrayList();
 		String sql = "Select Kunststil from Kuenstler_bevorzugt_Kunststil where  Kuenstler = ?";
 
 
@@ -115,14 +123,14 @@ public class KuenstlerProfilModel {
 
 			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()){
-				ArtstyleList.add(result.getString("Kunststil"));
+				items.add(FXCollections.observableArrayList(result.getString("Kunststil")));
 			}
 		} catch (SQLException e){
 			System.out.println("Fehler bei Kunststilliste!");
 			e.printStackTrace();
 		}
 
-		return ArtstyleList;
+		return items;
 	}
 
 
@@ -157,14 +165,63 @@ public class KuenstlerProfilModel {
 		return OpeningList;
 	}
 	public ObservableList<Collection> getCollectionfromSQL() {
-		// TODO Auto-generated method stub
-		return null;
+		String col = "Sammlung_ausgestellt_in_Gebaeude";
+		String query = "Select Sammlung.Name, Sammlung.SammlungID from Sammlung"
+				+ "INNER JOIN "+col+" on Sammlung.SammlungID = "+col+".SammlungID"
+				+ "where "+col+".GebaeudeID = ?";
+		ObservableList<Collection> col_data = FXCollections.observableArrayList();
+		try {
+			PreparedStatement col_query = connection.prepareStatement(query);
+			ResultSet results = null;
+			col_query.setInt(1, daten.getAtelier().getID());
+			results = col_query.executeQuery();
+			while(results.next()){
+				int sammlungID = results.getInt("SammlungID");
+				String name = results.getString("Name");
+				col_data.add(new Collection(sammlungID, name));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return col_data;
 	}
 	public ObservableList<ArtistComment> getArtistCommentsfromSQL() {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "Select Kommentator, Kommentartext, Zeitpunkt from KuenstlerKommentar where Kuenstler = ?";
+		ObservableList<ArtistComment> acomments = FXCollections.observableArrayList();
+		try {
+			PreparedStatement acomment_query = connection.prepareStatement(query);
+			acomment_query.setString(1, nutzer);
+			ResultSet results = acomment_query.executeQuery();
+			while(results.next()){
+				String acommentor = results.getString("Kommentator");
+				String acomment = results.getString("Kommentartext");
+				String zeitpunkt = results.getString("Zeitpunkt");
+				acomments.add(new ArtistComment(acomment, acommentor, nutzer, zeitpunkt));
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+
+		return acomments;
 	}
 
+	public void add_artist_comment(String comment, String kommentator) {
+		ArtistComment Kommentar = new ArtistComment(comment, kommentator, nutzer, (new Timestamp(System.currentTimeMillis())).toString());
+		String query = Kommentar.getQuery();
+		try {
+			PreparedStatement add_comment_query = connection.prepareStatement(query);
+			add_comment_query.setString(1, kommentator);
+			add_comment_query.setString(2, nutzer);
+			add_comment_query.setString(3, comment);
+			add_comment_query.setString(4, Kommentar.getZeitpunkt());
+			add_comment_query.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	private static class DataModel {
 		private User user;
 		private Atellier atelier;
@@ -181,6 +238,5 @@ public class KuenstlerProfilModel {
 		}
 
 	}
-
 
 }

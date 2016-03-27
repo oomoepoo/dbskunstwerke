@@ -53,14 +53,14 @@ public class Collection {
 	public Integer getSammlungID() {
 		return sammlungID.get();
 	}
-	public IntegerProperty sammlungIDProperty(){
+	public IntegerProperty getsammlungIDProperty(){
 		return sammlungID;
 	}
 
 	public String getName() {
 		return name.get();
 	}
-	public StringProperty nameProperty(){
+	public StringProperty getnameProperty(){
 		return name;
 	}
 

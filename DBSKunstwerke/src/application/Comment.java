@@ -1,7 +1,7 @@
 package application;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -10,10 +10,14 @@ import javafx.beans.property.StringProperty;
  * It's not intended to actually create instances of this,
  * we always want a comment to be either for Artists or Museums.
  *
+ * Edit: Added Generics stuff to handle Museums- and Artistcomments
+ * without problems.
+ * (I.e: Having a single super-constructor and getters/setter for the target stuff)
+ *
  * @author Jan
  *
  */
-public abstract class Comment {
+public abstract class Comment<V> {
 	/*
 	 * Names of the SQL-Tables and columns where the comments are stored.
 	 *
@@ -31,19 +35,15 @@ public abstract class Comment {
 
 	private StringProperty kommentar;
 	private StringProperty kommentator;
-	private IntegerProperty ziel;
+	private ObjectProperty<V> ziel;
 
-	protected Comment (String Text, String Kommentator, Integer Ziel){
-		this.kommentar = new SimpleStringProperty(Text);
-		this.kommentator = new SimpleStringProperty(Kommentator);
-		this.ziel = new SimpleIntegerProperty(Ziel);
-
+	protected Comment(String text, String kommentator, V ziel){
+		this.kommentar = new SimpleStringProperty(text);
+		this.kommentator = new SimpleStringProperty(kommentator);
+		this.ziel = new SimpleObjectProperty<V>(ziel);
 	}
 
-	public String getQuery () {
-		return "";
-
-	}
+	public abstract String getQuery ();
 
 	public String getComment() {
 		return kommentar.get();
@@ -52,7 +52,8 @@ public abstract class Comment {
 	public void setComment(String kommentar) {
 		this.kommentar.set(kommentar);
 	}
-	public StringProperty kommentarProperty(){
+
+	public StringProperty getkommentarProperty(){
 		return kommentar;
 	}
 
@@ -64,18 +65,19 @@ public abstract class Comment {
 		this.kommentator.set(kommentator);
 	}
 
-	public StringProperty kommentatorProperty(){
+	public StringProperty getkommentatorProperty(){
 		return kommentator;
 	}
 
-	public int getZiel() {
+	public V getZiel(){
 		return ziel.get();
 	}
 
-	public void setZiel(int ziel) {
+	public void setZiel(V ziel) {
 		this.ziel.set(ziel);
 	}
-	public IntegerProperty zielProperty(){
+
+	public ObjectProperty<V> getzielProperty(){
 		return ziel;
 	}
 

@@ -21,7 +21,7 @@ public class OpeningTime {
 		return weekday.toString();
 	}
 
-	public StringProperty weekdayProperty(){
+	public StringProperty getweekdayProperty(){
 		return weekday;
 	}
 
@@ -33,7 +33,7 @@ public class OpeningTime {
 		this.von.set(von);
 	}
 
-	public StringProperty vonProperty(){
+	public StringProperty getvonProperty(){
 		return von;
 	}
 
@@ -45,7 +45,7 @@ public class OpeningTime {
 		this.bis.set(bis);
 	}
 
-	public StringProperty bisProperty(){
+	public StringProperty getbisProperty(){
 		return bis;
 	}
 

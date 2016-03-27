@@ -61,6 +61,11 @@ public class MuseumsProfileController implements Initializable{
 	public ObservableList<MuesumsComment> com_list = mprofilemodel.create_com_from_sql();
 
 
+	public MuseumsProfileController(String username, int mid) {
+		this.username = username;
+		this.MuseumsID = mid;
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		init_tables();
@@ -84,21 +89,17 @@ public class MuseumsProfileController implements Initializable{
 
 	}
 	private void init_columns() {
-		op_weekdaycolumn.setCellValueFactory(cellData -> cellData.getValue().weekdayProperty());
-		op_fromcolumn.setCellValueFactory(cellData -> cellData.getValue().vonProperty());
-		op_tocolumn.setCellValueFactory(cellData -> cellData.getValue().bisProperty());
+		op_weekdaycolumn.setCellValueFactory(cellData -> cellData.getValue().getweekdayProperty());
+		op_fromcolumn.setCellValueFactory(cellData -> cellData.getValue().getvonProperty());
+		op_tocolumn.setCellValueFactory(cellData -> cellData.getValue().getbisProperty());
 
-		collectionNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+		collectionNameColumn.setCellValueFactory(cellData -> cellData.getValue().getnameProperty());
 		col_bisColumn.setCellValueFactory(cellData -> cellData.getValue().bisProperty());
 		col_seitColumn.setCellValueFactory(cellData -> cellData.getValue().vonProperty());
 
-		commentColumn.setCellValueFactory(cellData -> cellData.getValue().kommentarProperty());
-		userColumn.setCellValueFactory(cellData -> cellData.getValue().kommentatorProperty());
+		commentColumn.setCellValueFactory(cellData -> cellData.getValue().getkommentarProperty());
+		userColumn.setCellValueFactory(cellData -> cellData.getValue().getkommentatorProperty());
 
-	}
-	public void set_data(String username, int mid){
-		this.username = username;
-		this.MuseumsID = mid;
 	}
 
 }

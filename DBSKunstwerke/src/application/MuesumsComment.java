@@ -1,8 +1,6 @@
 package application;
 
-
-
-public class MuesumsComment extends Comment {
+public class MuesumsComment extends Comment<Integer> {
 	public final static String ZCOL = "Museum";
 
 
