@@ -32,7 +32,7 @@ public class KunstwerkProfilController implements Initializable {
 	@FXML
 	private Label labelArtstyle;
 	@FXML
-	private TableView tview_Abdruck;
+	private TableView<String> tview_Abdruck;
 	@FXML
 	private TableColumn breiteColumn;
 	@FXML
