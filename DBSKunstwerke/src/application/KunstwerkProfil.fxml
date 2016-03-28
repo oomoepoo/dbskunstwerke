@@ -1,8 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+<TabPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.KunstwerkProfilController">
+   <tabs>
+      <Tab text="Details">
+         <content>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <HBox layoutX="16.0" layoutY="15.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="labelKWName" prefHeight="36.0" prefWidth="139.0" text="Kunstwerkname" />
+                        <Label fx:id="labelCYear" prefHeight="36.0" prefWidth="113.0" text="Entstehungsjahr" />
+                        <Label fx:id="labelArtstyle" prefHeight="36.0" prefWidth="110.0" text="Kunststil" />
+                     </children>
+                  </HBox>
+                  <TableView layoutX="380.0" layoutY="49.0" prefHeight="113.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn prefWidth="199.0" text="Künstler" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="tview_Abdruck" layoutX="14.0" layoutY="186.0" prefHeight="200.0" prefWidth="298.0">
+                    <columns>
+                      <TableColumn fx:id="breiteColumn" prefWidth="65.0" text="Breite" />
+                      <TableColumn fx:id="hoeheColumn" prefWidth="85.0" text="Höhe" />
+                        <TableColumn fx:id="preisColumn" prefWidth="75.0" text="Preis" />
+                        <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="16.0" layoutY="150.0" prefHeight="36.0" prefWidth="144.0" text="Verfügbare Abdrucke:" />
+                  <Button fx:id="btnBestellen" layoutX="318.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleOrderBtnAction" prefHeight="36.0" prefWidth="144.0" text="Abdruck bestellen" />
+                  <HBox layoutX="14.0" layoutY="72.0" prefHeight="33.0" prefWidth="295.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="33.0" prefWidth="151.0" text="Derzeitiger Standort:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelStandort" prefHeight="35.0" prefWidth="122.0" text="Ort" textFill="#121112" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Bewertungen">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tview_Bewertung" layoutX="12.0" layoutY="34.0" prefHeight="231.0" prefWidth="581.0">
+                    <columns>
+                      <TableColumn fx:id="bewertungColumn" prefWidth="94.0" text="Bewertung" />
+                      <TableColumn fx:id="kommentarColumn" prefWidth="343.0" text="Kommentar" />
+                        <TableColumn fx:id="userColumn" prefWidth="89.0" text="Nutzer" />
+                    </columns>
+                  </TableView>
+                  <ListView fx:id="lviewWertung" layoutX="14.0" layoutY="271.0" orientation="HORIZONTAL" prefHeight="33.0" prefWidth="584.0" />
+                  <TextField fx:id="tareaWertung" layoutX="14.0" layoutY="312.0" prefHeight="79.0" prefWidth="491.0" />
+                  <Button fx:id="btnSendWertung" layoutX="514.0" layoutY="312.0" mnemonicParsing="false" onAction="#handleSendBtnAction" prefHeight="70.0" prefWidth="83.0" text="Senden" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+   </tabs>
+</TabPane>
