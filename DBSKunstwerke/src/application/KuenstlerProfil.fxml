@@ -158,9 +158,9 @@
                   <TextArea fx:id="tfieldKommentar" layoutX="18.0" layoutY="277.0" prefHeight="82.0" prefWidth="422.0" text="Kommentartext" />
                   <TableView fx:id="tviewArtistComment" layoutX="20.0" layoutY="14.0" prefHeight="252.0" prefWidth="565.0">
                     <columns>
-                      <TableColumn fx:id="ac_userColumn" prefWidth="118.0" text="Nutzer" />
-                      <TableColumn fx:id="ac_commentColumn" prefWidth="311.0" text="Kommetar" />
-                        <TableColumn fx:id="ac_timestampColumn" prefWidth="135.0" text="Zeitpunkt" />
+                      <TableColumn fx:id="ac_userColumn" editable="false" prefWidth="118.0" text="Nutzer" />
+                      <TableColumn fx:id="ac_commentColumn" editable="false" prefWidth="311.0" text="Kommentar" />
+                        <TableColumn fx:id="ac_timestampColumn" editable="false" prefWidth="135.0" text="Zeitpunkt" />
                     </columns>
                   </TableView>
                   <Button fx:id="btnSendComment" layoutX="454.0" layoutY="277.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="127.0" text="Absenden" />

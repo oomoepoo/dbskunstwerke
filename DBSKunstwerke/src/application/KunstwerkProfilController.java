@@ -108,6 +108,12 @@ public class KunstwerkProfilController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		init_cells();
 		init_tables();
+		init_labels();
+	}
+
+	public void init_labels() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void init_cells() {
