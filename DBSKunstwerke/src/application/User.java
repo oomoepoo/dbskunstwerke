@@ -27,6 +27,12 @@ public class User {
 		this.email = new SimpleStringProperty(email);
 	}
 
+	public User(String username, String vorname, String nachname, String email){
+		this.username = new SimpleStringProperty(username);
+		this.vorname = new SimpleStringProperty(vorname);
+		this.nachname = new SimpleStringProperty(nachname);
+		this.email = new SimpleStringProperty(email);
+	}
 	public User() {
 	}
 
@@ -38,8 +44,8 @@ public class User {
 		this.username.set(username);
 	}
 
-	public String getusernameProperty() {
-		return username.get();
+	public StringProperty getusernameProperty() {
+		return username;
 	}
 
 	public String getVorname() {
