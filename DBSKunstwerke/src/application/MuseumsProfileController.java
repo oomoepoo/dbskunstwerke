@@ -16,6 +16,7 @@ import javafx.scene.control.TableView;
 
 public class MuseumsProfileController implements Initializable{
 	public int MuseumsID;
+	public Museum museum;
 	public String username;
 	MuseumsProfileModel mprofilemodel = new MuseumsProfileModel(MuseumsID);
 
@@ -61,14 +62,25 @@ public class MuseumsProfileController implements Initializable{
 	public ObservableList<MuesumsComment> com_list = mprofilemodel.create_com_from_sql();
 
 
-	public MuseumsProfileController(String username, int mid) {
+	public MuseumsProfileController(String username, Museum museum) {
 		this.username = username;
-		this.MuseumsID = mid;
+		this.MuseumsID = museum.getID();
+		this.museum = museum;
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		init_tables();
+		txtMStreet.setText(museum.getStreet());
+
+		txtMNumber.setText(museum.getHnumber());
+
+		txtMCountry.setText(museum.getCountry());
+
+		txtMCity.setText(museum.getCity());
+
+		txtMName.setText(museum.getMname());
+
 	}
 
 	@FXML

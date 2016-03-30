@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="401.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="401.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SearchController">
   <tabs>
     <Tab text="Museen">
          <content>
@@ -19,7 +19,7 @@
                <children>
                   <HBox layoutX="36.0" layoutY="14.0" spacing="10.0">
                      <children>
-                        <TextField fx:id="tfieldMuseumFilter" text="Filtern nach..." />
+                        <TextField fx:id="tfieldMuseumFilter" onKeyReleased="#handleMuseumsFilter" text="Filtern nach..." />
                         <ComboBox fx:id="cboxMuseumFilter" prefWidth="150.0" />
                      </children>
                   </HBox>
@@ -31,21 +31,21 @@
                             <TableColumn fx:id="museumcityColumn" prefWidth="93.0" text="Stadt" />
                           </columns>
                         </TableView>
-                        <Button fx:id="btnMuseumDetails" mnemonicParsing="false" onAction="#showDetails" prefHeight="34.0" prefWidth="102.0" text="Anschauen" />
+                        <Button fx:id="btnMuseumDetails" mnemonicParsing="false" onAction="#showMuseumDetails" prefHeight="34.0" prefWidth="102.0" text="Anschauen" />
                      </children>
                   </VBox>
                </children>
             </AnchorPane>
          </content>
     </Tab>
-    <Tab fx:id="cboxArtistFilter" text="Künstler">
+    <Tab text="Künstler">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <HBox layoutX="36.0" layoutY="14.0" spacing="10.0">
                      <children>
-                        <TextField fx:id="tfieldArtistFilter" text="Filtern nach..." />
-                        <ComboBox prefWidth="150.0" />
+                        <TextField fx:id="tfieldArtistFilter" onKeyReleased="#handleArtistFilter" text="Filtern nach..." />
+                        <ComboBox fx:id="cboxArtistFilter" prefWidth="150.0" />
                      </children>
                   </HBox>
                   <VBox layoutX="36.0" layoutY="61.0">
@@ -57,20 +57,20 @@
                               <TableColumn fx:id="artistunameColumn" prefWidth="99.0" text="Nutzername" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" onAction="#showDetails" prefHeight="34.0" prefWidth="102.0" text="Anschauen" />
+                        <Button mnemonicParsing="false" onAction="#showArtistDetails" prefHeight="34.0" prefWidth="102.0" text="Anschauen" />
                      </children>
                   </VBox>
                </children></AnchorPane>
       </content>
     </Tab>
-      <Tab fx:id="cboxArtworkFilter" text="Kunstwerke">
+      <Tab text="Kunstwerke">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <HBox layoutX="36.0" layoutY="14.0" spacing="10.0">
                      <children>
-                        <TextField fx:id="tfieldArtworkFilter" text="Filtern nach..." />
-                        <ComboBox prefWidth="150.0" />
+                        <TextField fx:id="tfieldArtworkFilter" onKeyReleased="#handleArtworkFilter" text="Filtern nach..." />
+                        <ComboBox fx:id="cboxArtworkFilter" prefWidth="150.0" />
                      </children>
                   </HBox>
                   <VBox layoutX="36.0" layoutY="61.0">
@@ -79,23 +79,24 @@
                            <columns>
                               <TableColumn fx:id="artworknameColumn" prefWidth="75.0" text="Name" />
                               <TableColumn fx:id="artstyleColumn" prefWidth="75.0" text="Kunststil" />
+                              <TableColumn fx:id="yearColum" prefWidth="75.0" text="Jahr" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" onAction="#showDetails" prefHeight="34.0" prefWidth="102.0" text="Anschauen" />
+                        <Button mnemonicParsing="false" onAction="#showArtworkDetails" prefHeight="34.0" prefWidth="102.0" text="Anschauen" />
                      </children>
                   </VBox>
                </children>
             </AnchorPane>
         </content>
       </Tab>
-      <Tab fx:id="cboxCollectionFilter" text="Sammlungen">
+      <Tab text="Sammlungen">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <HBox layoutX="36.0" layoutY="14.0" spacing="10.0">
                      <children>
-                        <TextField fx:id="tfieldCollectionFilter" text="Filtern nach..." />
-                        <ComboBox prefWidth="150.0" />
+                        <TextField fx:id="tfieldCollectionFilter" onKeyReleased="#handleCollectionFilter" text="Filtern nach..." />
+                        <ComboBox fx:id="cboxCollectionFilter" prefWidth="150.0" />
                      </children>
                   </HBox>
                   <VBox layoutX="36.0" layoutY="61.0">
@@ -106,7 +107,7 @@
                               <TableColumn fx:id="colplaceColumn" prefWidth="114.0" text="Standort" />
                            </columns>
                         </TableView>
-                        <Button mnemonicParsing="false" onAction="#showDetails" prefHeight="34.0" prefWidth="102.0" text="Anschauen" />
+                        <Button mnemonicParsing="false" onAction="#showCollectionDetails" prefHeight="34.0" prefWidth="102.0" text="Anschauen" />
                      </children>
                   </VBox>
                </children>

@@ -23,15 +23,17 @@ public class Artwork {
 	private ArrayList<StringProperty> creators;
 	private IntegerProperty creationyear;
 	private StringProperty artstyle;
+	private IntegerProperty id;
 
 	public Artwork(String name){
 		this.name = new SimpleStringProperty(name);
 	}
 
-	public Artwork(String name,int creationyear, String artstyle, String...artists ){
+	public Artwork(String name,int creationyear, String artstyle,int id, String...artists ){
 		this.name = new SimpleStringProperty(name);
 		this.creationyear = new SimpleIntegerProperty(creationyear);
 		this.artstyle = new SimpleStringProperty(artstyle);
+		this.id = new SimpleIntegerProperty(id);
 		for (String artist : artists) {
 			this.creators.add(new SimpleStringProperty(artist));
 		}
