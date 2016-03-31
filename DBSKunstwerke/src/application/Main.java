@@ -9,11 +9,11 @@ import javafx.scene.Scene;
 
 public class Main extends Application {
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) {//
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Login zu DBS-Kunstwerke");
 			primaryStage.show();

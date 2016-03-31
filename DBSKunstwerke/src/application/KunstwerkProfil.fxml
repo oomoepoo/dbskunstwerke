@@ -11,8 +11,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.Pane?>
 
-<TabPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.KunstwerkProfilController">
+<Pane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+<TabPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controll.KunstwerkProfilController">
    <tabs>
       <Tab text="Details">
          <content>
@@ -74,3 +77,5 @@
       </Tab>
    </tabs>
 </TabPane>
+</children>
+</Pane>

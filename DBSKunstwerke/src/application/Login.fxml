@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controll.LoginController">
    <children>
       <Label fx:id="isConnected" alignment="CENTER" layoutX="10.0" layoutY="8.0" prefHeight="46.0" prefWidth="288.0" text="Status" textAlignment="CENTER" textFill="#e80808" />
       <TextField id="userField" fx:id="userField" layoutX="65.0" layoutY="85.0" prefHeight="35.0" prefWidth="171.0" promptText="Benutzername" />
