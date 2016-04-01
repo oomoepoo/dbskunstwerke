@@ -100,11 +100,11 @@ public class KuenstlerProfilController implements Initializable{
 	@FXML
 	private Button btnSendComment;
 
-	public ObservableList<ObservableList<String>> astyletable = kpm.getArtStylesfromSQL();
-	public ObservableList<Artwork> aworktable = kpm.getArtworksfromSQL();
-	public ObservableList<OpeningTime> otimetable = kpm.getOpeningTimesfromSQL();
-	public ObservableList<Collection> collectiontable = kpm.getCollectionfromSQL();
-	public ObservableList<ArtistComment> acommenttable = kpm.getArtistCommentsfromSQL();
+	public ObservableList<ObservableList<String>> astyletable;
+	public ObservableList<Artwork> aworktable;
+	public ObservableList<OpeningTime> otimetable;
+	public ObservableList<Collection> collectiontable;
+	public ObservableList<ArtistComment> acommenttable;
 
 	/**
 	 * Constructor for the Controller class
@@ -117,6 +117,11 @@ public class KuenstlerProfilController implements Initializable{
 		this.kpm = new KuenstlerProfilModel(kuenstlername);
 		this.nutzer = benutzername; //Der Nutzer, der auf das Profil zugreift.
 		this.kuenstler = kuenstlername; //Der Kuenstler, dessen Profil angesehen wird.
+		this.astyletable = kpm.getArtStylesfromSQL();
+		this.aworktable = kpm.getArtworksfromSQL();
+		this.otimetable = kpm.getOpeningTimesfromSQL();
+		this.collectiontable = kpm.getCollectionfromSQL();
+		this.acommenttable = kpm.getArtistCommentsfromSQL();
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

@@ -39,6 +39,7 @@ public class KunstwerkProfilModel {
 			ResultSet results = preparedStatement.executeQuery();
 			while(results.next()){
 				String text = results.getString("Kommentar");
+				if (text.isEmpty()) text = "Kein Kommentar";
 				String kommentator = results.getString("Benutzername");
 				int ziel = results.getInt("KunstwerkID");
 				int bewertung = results.getInt("Bewertung");
@@ -79,7 +80,7 @@ public class KunstwerkProfilModel {
 
 	public ObservableList<User> getArtistsfromSQL(int kunstwerk) {
 		ObservableList<User> artists = FXCollections.observableArrayList();
-		query = "select Benutzer.Benutzername, Benutzer.Vorname, Benutzer.Nachname, Benutzer.email"
+		query = "select Benutzer.Benutzername, Benutzer.Vorname, Benutzer.Nachname, Benutzer.`E-Mail`,"
 				+ "Adresse.Land, Adresse.Stadt, Adresse.Strasse, Adresse.Hausnummer "
 				+ "from Kuenstler_erstellt_Kunstwerk "
 				+ "inner join Benutzer on Kuenstler_erstellt_Kunstwerk.Kuenstler = Benutzer.Benutzername "

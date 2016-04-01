@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -119,7 +120,7 @@ public class SearchController implements Initializable{
 			loader.setLocation(url);
 			Pane root = loader.load();
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("DBS-Kunstwerke: "+museum.getMname());
 			primaryStage.show();
@@ -163,7 +164,7 @@ public class SearchController implements Initializable{
 			loader.setLocation(url);
 			Pane root = loader.load();
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("DBS-Kunstwerke: "+artwork.getName());
 			primaryStage.show();
@@ -178,7 +179,6 @@ public class SearchController implements Initializable{
 	public void showCollectionDetails(ActionEvent event) {
 		Collection collection = tviewCollections.getSelectionModel().getSelectedItem();
 			try {
-				System.out.println(collection.getsammlungIDProperty().get());
 				URL url = getClass().getResource("/application/KunstwerkProfil.fxml");
 				Stage primaryStage = new Stage();
 				FXMLLoader loader = new FXMLLoader();
@@ -187,7 +187,7 @@ public class SearchController implements Initializable{
 				loader.setLocation(url);
 				Pane root = loader.load();
 				Scene scene = new Scene(root);
-				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+				scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
 				primaryStage.setScene(scene);
 				primaryStage.setTitle("DBS-Kunstwerke: "+collection.getName());
 				primaryStage.show();
@@ -270,6 +270,7 @@ public class SearchController implements Initializable{
 
 		artstyleColumn.setCellValueFactory(cellData -> cellData.getValue().getartstyleProperty());
 		artworknameColumn.setCellValueFactory(cellData -> cellData.getValue().getnameProperty());
+		yearColum.setCellValueFactory(cellData -> cellData.getValue().getcreationyearProperty().asObject());
 
 		colplaceColumn.setCellValueFactory(cellData -> cellData.getValue().getplaceProperty());
 		colnameColumn.setCellValueFactory(cellData -> cellData.getValue().getnameProperty());
@@ -369,7 +370,7 @@ public class SearchController implements Initializable{
 	}
 
 	@FXML
-	private void handleMuseumsFilter() {
+	private void handleMuseumsFilter(KeyEvent b) {
 		String newValue = tfieldArtistFilter.getText();
 		String filter = cboxArtistFilter.getSelectionModel().getSelectedItem();
 		Predicate<Museum> mpredicate = new Predicate<Museum>()
@@ -462,7 +463,7 @@ public class SearchController implements Initializable{
 				String street = rs.getString("Strasse");
 				String city = rs.getString("Stadt");
 				String hnumber = rs.getString("Hausnummer");
-				int id = rs.getInt(1);
+				int id = rs.getInt("GebaeudeID");
 				String name = rs.getString("Name");
 				museums.add(new Museum(country, street, city, hnumber, id, name));
 			}

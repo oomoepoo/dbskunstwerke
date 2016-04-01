@@ -23,7 +23,7 @@ public class MuseumsProfileController implements Initializable{
 	public int MuseumsID;
 	public Museum museum;
 	public String username;
-	MuseumsProfileModel mprofilemodel = new MuseumsProfileModel(MuseumsID);
+	MuseumsProfileModel mprofilemodel;
 
 	@FXML
 	private TableView<OpeningTime> openingTable;
@@ -62,19 +62,24 @@ public class MuseumsProfileController implements Initializable{
 	@FXML
 	private TableColumn <MuesumsComment, String> commentColumn;
 
-	public ObservableList<OpeningTime> op_list = mprofilemodel.create_ot_from_sql();
-	public ObservableList<collection_view> col_list = mprofilemodel.create_col_from_sql();
-	public ObservableList<MuesumsComment> com_list = mprofilemodel.create_com_from_sql();
+	ObservableList<OpeningTime> op_list;
+	ObservableList<collection_view> col_list;
+	ObservableList<MuesumsComment> com_list;
 
 
 	public MuseumsProfileController(String username, Museum museum) {
 		this.username = username;
 		this.MuseumsID = museum.getID();
 		this.museum = museum;
+		this.mprofilemodel = new MuseumsProfileModel(MuseumsID);
+		op_list = mprofilemodel.create_ot_from_sql();
+		col_list = mprofilemodel.create_col_from_sql();
+		com_list = mprofilemodel.create_com_from_sql();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		init_tables();
 		txtMStreet.setText(museum.getStreet());
 

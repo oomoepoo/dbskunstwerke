@@ -102,6 +102,7 @@ public class KuenstlerProfilModel {
 				String von = results.getString("von");
 				String bis = results.getString("bis");
 				OpeningTime open = new OpeningTime(Wochentag, von, bis);
+				System.out.println(open.getWeekday());
 				atelier.setOpeningtimes(open);
 			}
 		} catch(SQLException e){
@@ -166,8 +167,8 @@ public class KuenstlerProfilModel {
 	}
 	public ObservableList<OpeningTime> getOpeningTimesfromSQL() {
 		ObservableList<OpeningTime> OpeningList = FXCollections.observableArrayList();
-		while(daten.getAtelier().getOpeningtimes().hasNext()){
-			OpeningList.add(daten.getAtelier().getOpeningtimes().next());
+		while(this.daten.getAtelier().getOpeningtimes().hasNext()){
+			OpeningList.add(this.daten.getAtelier().getOpeningtimes().next());
 		}
 		return OpeningList;
 	}

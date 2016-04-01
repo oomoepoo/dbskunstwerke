@@ -13,7 +13,7 @@ import javafx.beans.property.SimpleIntegerProperty;
  *
  */
 public class KunstwerkBewertung extends Comment<Integer>{
-	public static final String TNAME = "Kuenstler_bewertet_Kunstwerk";
+	public static final String TNAME = "Benutzer_bewertet_Kunstwerk";
 
 	private IntegerProperty bewertung;
 
@@ -24,7 +24,7 @@ public class KunstwerkBewertung extends Comment<Integer>{
 
 	@Override
 	public String getQuery() {
-		String query = "Insert into "+TNAME+"(Kommentar, Benutzername, KunstwerkID, Bewertung ) values (?,?,?,?)";
+		String query = "Insert into "+TNAME+"(Benutzername, KunstwerkID, Bewertung, Kommentar ) values (?,?,?,?)";
 		return query;
 	}
 

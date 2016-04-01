@@ -64,16 +64,19 @@ public class KunstwerkProfilController implements Initializable {
 	private Button btnSendWertung;
 	private KunstwerkProfilModel kwpm = new KunstwerkProfilModel();
 
-	public ObservableList<Integer> wertungen = FXCollections.observableArrayList (1,2,3,4,5,6,7,8,9,10);
-	public ObservableList<KunstwerkBewertung> bewertungen = kwpm.getBewertungenfromSQL(kunstwerk);
-	public ObservableList<User> artists = kwpm.getArtistsfromSQL(kunstwerk);
-	public ObservableList<Abdruck> abdrucke = kwpm.getAbdruckfromSQL(kunstwerk);
+	public ObservableList<Integer> wertungen;
+	public ObservableList<KunstwerkBewertung> bewertungen;
+	public ObservableList<User> artists;
+	public ObservableList<Abdruck> abdrucke;
 
 
 	// Constructor: Mal wieder, um Werte zu übergeben.
 	public KunstwerkProfilController(Integer kunstwerk, String nutzer) {
 		this.kunstwerk = kunstwerk;
 		this.nutzer = nutzer;
+		bewertungen = kwpm.getBewertungenfromSQL(kunstwerk);
+		artists = kwpm.getArtistsfromSQL(kunstwerk);
+		abdrucke = kwpm.getAbdruckfromSQL(kunstwerk);
 	}
 
 	// Event Listener on Button[#btnBestellen].onAction
@@ -116,7 +119,7 @@ public class KunstwerkProfilController implements Initializable {
 
 	public void init_labels() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void init_cells() {

@@ -26,7 +26,7 @@ public class MuseumsProfileModel {
 	}
 
 	public ObservableList<OpeningTime> create_ot_from_sql(){
-		String query = "Select Wochentag, von, bis from Oeffnungszeiten where GebauedeID = ?";
+		String query = "Select Wochentag, von, bis from Oeffnungszeiten where GebaeudeID = ?";
 		ObservableList<OpeningTime> OpeningList = FXCollections.observableArrayList();
 		try {
 			PreparedStatement opening_query = conection.prepareStatement(query);
@@ -48,10 +48,12 @@ public class MuseumsProfileModel {
 	}
 
 	public ObservableList<collection_view> create_col_from_sql() {
-		String col = "Sammlung_ausgestellt_in_Gebaeude";
-		String query = "Select Sammlung.SammlungID, Sammlung.Name,"+col+".von,"+col+".bis from Sammlung"
-				+ "INNER JOIN "+col+" on Sammlung.SammlungID = "+col+".SammlungID"
-				+ "where "+col+".GebaeudeID = ?";
+		String query = "Select Sammlung.SammlungID, Sammlung.Name, "
+				+ "Sammlung_ausgestellt_in_Gebaeude.von, Sammlung_ausgestellt_in_Gebaeude.bis "
+				+ "from Sammlung "
+				+ "inner join Sammlung_ausgestellt_in_Gebaeude "
+				+ "on Sammlung.SammlungID = Sammlung_ausgestellt_in_Gebaeude.SammlungID "
+				+ "where Sammlung_ausgestellt_in_Gebaeude.GebaeudeID = ?";
 		ObservableList<collection_view> col_data = FXCollections.observableArrayList();
 		try {
 			PreparedStatement col_query = conection.prepareStatement(query);
@@ -97,9 +99,9 @@ public class MuseumsProfileModel {
 		String query = Kommentar.getQuery();
 		try {
 			PreparedStatement add_comment_query = conection.prepareStatement(query);
-			add_comment_query.setString(1, comment);
-			add_comment_query.setString(2, username);
-			add_comment_query.setInt(3, museum);
+			add_comment_query.setString(1, username);
+			add_comment_query.setString(3,comment);
+			add_comment_query.setInt(2, museum);
 			add_comment_query.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
