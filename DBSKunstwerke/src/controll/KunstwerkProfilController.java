@@ -3,6 +3,7 @@ package controll;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import backend.Artwork;
 import backend.KunstwerkBewertung;
 import backend.User;
 import javafx.collections.FXCollections;
@@ -24,6 +25,7 @@ public class KunstwerkProfilController implements Initializable {
 
 	private int kunstwerk;
 	private String nutzer;
+	private Artwork kwerk;
 	@FXML
 	private Label labelKWName;
 	@FXML
@@ -79,6 +81,15 @@ public class KunstwerkProfilController implements Initializable {
 		abdrucke = kwpm.getAbdruckfromSQL(kunstwerk);
 	}
 
+	public KunstwerkProfilController (Artwork kunstwerk, String nutzer){
+		this.kunstwerk = kunstwerk.getId();
+		this.kwerk = kunstwerk;
+		this.nutzer = nutzer;
+		bewertungen = kwpm.getBewertungenfromSQL(kunstwerk.getId());
+		artists = kwpm.getArtistsfromSQL(kunstwerk.getId());
+		abdrucke = kwpm.getAbdruckfromSQL(kunstwerk.getId());
+	}
+
 	// Event Listener on Button[#btnBestellen].onAction
 	@FXML
 	public void handleOrderBtnAction(ActionEvent event) {
@@ -118,7 +129,7 @@ public class KunstwerkProfilController implements Initializable {
 	}
 
 	public void init_labels() {
-		// TODO Auto-generated method stub
+
 
 	}
 
